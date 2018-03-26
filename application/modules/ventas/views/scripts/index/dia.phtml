@@ -1,0 +1,19 @@
+<?php echo $this->nav; ?>
+
+<div class="listado-noticias">
+    <h2>Actividades</h2>
+    <?php if(count($this->listado_actividades)){ 
+	foreach($this->listado_actividades as $actividad){?>
+    <div class="item-listado">
+		<a href="<?php echo $this->url?><?php echo $actividad->url;?>/" class="link"><img src="<?php echo $actividad->imagen;?>" alt="<?php echo $actividad->titulo;?>" width="100" height="100" /></a>
+		<div class="contenido-actividad">
+			<?php echo ($actividad->rama->nombre) ? $actividad->rama->nombre.":" : ""?> <a href="<?php echo $this->url?><?php echo $actividad->url;?>/"><?php echo $actividad->titulo;?></a>
+			<p class="text-info"><?php echo $actividad->fecha->show();?></p>
+			<p><?php echo $actividad->resumen;?></p>
+		</div>
+    </div>
+    <?php } ?>
+	<?php }else{ ?>
+    	<p>No existen actividades para el día seleccionado.</p>
+    <?php } ?>
+</div>

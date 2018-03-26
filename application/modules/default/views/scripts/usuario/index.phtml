@@ -1,0 +1,110 @@
+﻿<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6">
+						<h3 style="margin-bottom:0px;"><?php echo $this->title;?></h3>
+					</div>
+					<div class="col-md-6 text-right">
+						<?php if($this->session_usu->tipo == 1){ ?>
+						<a href="/usuarios/nuevo/" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#2eacce;"></span> <br>Añadir Usuario</a>
+						<?php } ?>
+					</div>	
+				</div>
+			  
+			</div> 
+		</div>
+		
+	
+  
+  
+		<div class="col-md-12">
+			<div class="panel panel-default">
+
+				<div class="panel-body">
+				  <!-- Table -->
+				  
+				  <table class="table table-hover table-bordered" id="table-usuario" >
+					<thead>
+					
+					<tr>
+					  <th>Usuario</th>
+					  <th>Nombre</th>
+					  <th>Tipo</th>
+					  <th>Email</th>
+					  <th>Estado</th>
+					  <th>Acción</th>
+					</tr>			
+					</thead>
+
+				<tbody>
+				  <?php if (count($this->usuarios)) { ?>
+					  <?php foreach ($this->usuarios as $aux) { ?>    
+						<tr>
+						  <td><?php echo $aux->usuario;?></td>
+						  <td><?php echo $aux->nombre;?></td>
+						  <td><?php echo ($aux->tipo==1)?"Administrador":"Vendedor";?></td>
+						  <td><?php echo $aux->email;?></td>
+						  <td id="estado_<?php echo $aux->id;?>" class="estado-content" ><?php echo ($aux->estado==1)?"<label class='label label-success estado' id='$aux->id'>Activo</label>":"<label class='label label-danger estado' id='$aux->id'>Inactivo</label>";?></td>
+						  <td>
+						  
+								<div class="btn-group">
+								  <a class="btn btn-default btn-sm btn-editar" value="<?php echo $aux->id;?>" href="/usuarios/obtener/<?php echo $aux->id;?>/" ><span class="glyphicon glyphicon-pencil" aria-hidden="true" style="color:#555;"></span> Modificar</a>
+								  <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<span class="caret"></span>
+									<span class="sr-only"></span>
+								  </button>
+								  <ul class="dropdown-menu">
+									<li><a href="/usuarios/eliminar/<?php echo $aux->id;?>/" class="eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color:#555;"></span> Eliminar</a></li>
+									<li><a href="#" id="<?php echo $aux->id;?>" class="password" ><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Contraseña</a></li>
+									<li><a href="/usuarios/accesos/<?php echo $aux->id;?>/" id="<?php echo $aux->id;?>" class="accesos" ><span class="glyphicon glyphicon glyphicon-th" aria-hidden="true"></span> Accesos</a></li>									
+								  </ul>
+								</div>							
+							
+						  </td> 
+						</tr>
+					  <?php } ?>
+				  <?php }else{ ?>
+						<tr>
+						  <td colspan="4">No existen Usuarios</td>
+						</tr>
+				  <?php } ?>
+				  
+				</tbody> 
+
+				  </table>
+				  
+				</div>
+			</div>
+		</div>
+ 
+</div>
+</div>
+<style>
+.estado {
+	cursor:pointer;
+}
+</style>
+
+<div class="modal fade" id="modalPassword" tabindex="-1" role="dialog" aria-labelledby="modalPassword">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" id="pass-content">
+		<div class="modal-body">
+		<form method="post" action="/usuarios/pass/<?php echo $this->id; ?>" name="form-pass" id="form-pass" autocomplete="off">
+		  <input type="hidden" value="" id="id_usuario_password" name="id_usuario_password" >
+		  <div class="form-group">
+			<input type="password" class="form-control" id="clave" name="clave" placeholder="Contraseña" required value="" >
+		  </div>
+		  <div class="form-group">
+			<input type="password" class="form-control" id="clave_2" name="clave_2" placeholder="Repetir Contraseña" value="" required >
+		  </div>	  
+		</form>
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-primary" id="guardar">Guardar</button>
+		</div>
+    </div>
+  </div>
+</div>
+

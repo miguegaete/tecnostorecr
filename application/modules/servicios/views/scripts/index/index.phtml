@@ -1,0 +1,153 @@
+﻿<div class="container">
+<div class="row-fluid">
+  <div class="col-md-12">
+
+    <div class="page-header">
+      <h2><?php echo $this->title;?></h2>
+    </div>
+  </div>
+  <form name="form1" id="form1" method="post" action="" > 
+	<div class="row">
+		<div class="col-md-4">
+
+		</div>
+		<div class="col-md-6 col-md-offset-2 text-right">
+			<a href="" id="abrir_listado" class="btn btn-default"><span class="glyphicon glyphicon-th-list" aria-hidden="true" style="color:#2eacce;"></span> <br>Listar Clientes</a>
+		</div>
+	</div>	  
+	<div class="row">
+	<div class="col-md-12">
+		<h4>Cliente</h4>
+	</div>
+	</div>
+
+	<div class="row">
+
+		<div class="col-md-2">
+			<div class="form-group">
+				<label for="rut">RUT</label>
+				<input type="text" class="form-control"  id="rut" name="rut" required>
+				<input type="text" class="form-control"  id="tipo" name="tipo" required>
+			</div>	
+		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="nombre">Nombre Cliente</label>
+				<input class="form-control" id="nombre" name="nombre" required maxlength="100" >
+			</div>    
+		</div>		
+		<div class="col-md-3">
+			<div class="form-group">
+				<label for="telefono">Fono Contacto</label>
+				<input type="phone" class="form-control"  id="telefono" name="telefono" maxlength="50">
+			</div>
+		</div>	
+		<div class="col-md-3">
+			<div class="form-group">
+				<label for="email">Correo Electrónico</label>
+				<input type="mail" class="form-control"  id="email" name="email" maxlength="100">
+			</div>  
+		</div>			
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			 <button type="submit" class="btn btn-primary">Guardar Cliente</button>
+		</div>
+	</div>
+	</form>
+	<form name="form2" id="form2" method="post" action="" > 
+	<div class="row">
+
+		<div class="col-md-12">
+			<h4>Equipo</h4>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group">
+				<label for="imei">IMEI</label>
+				<input type="text" class="form-control"  id="imei" name="imei" >
+			</div>
+		</div>
+
+		<div class="col-md-3">
+			<div class="form-group">
+				<label for="categoria">Categoría</label>
+				<select class="form-control" name="categoria" id="categoria" required>
+				</select>
+			</div>  
+		</div>
+		<div class="col-md-1">
+			<div class="form-group">
+				<label for="valor">&nbsp;</label>
+				<a href="" class="form-control text-center"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+			</div>
+		</div>		
+		<div class="col-md-3 col-md-offset-1">
+			<div class="form-group">
+				<label for="modelo">Modelo</label>
+				<input type="text" class="form-control" id="modelo" name="modelo">
+			</div>  
+		</div>	
+	</div>
+	<div class="row">
+	<div class="col-md-7">
+			<div class="form-group">
+				<label for="descripcion">Descripción / Falla</label>
+				<textarea required class="form-control" name="descripcion" id="descripcion" ></textarea>
+			</div>		
+			
+		</div>
+		<div class="col-md-3 col-md-offset-2">
+			<div class="form-group">
+				<label for="estado">Estado</label>
+				<select class="form-control" name="estado" id="estado">
+					<option value="">Seleccione estado</option>
+					<option value="0">En proceso</option>
+					<option value="1">Terminado</option>
+				</select>
+			</div>	
+		</div>
+	</div>	
+	<div class="row">
+		<div class="col-md-12">
+			 <button type="submit" class="btn btn-primary">Guardar</button>
+		</div>
+	</div>
+  </form>
+
+
+</div>
+</div>
+<div id="mensaje-ajax">
+</div>
+
+		<div class="modal fade" id="listar_registros" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<form id="form-cliente" name="form-cliente" autocomplete="off">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Listado Clientes</h4>
+					</div>
+					<div class="modal-body">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Código</th>
+									<th>Cliente</th>
+									<th>Equipo</th>
+									<th>Descripción</th>
+								</tr>
+							</thead>
+							<tbody class="body_clientes">
+							</tbody>
+						</table>
+						
+					</div>
+					<div class="modal-footer">
+						<button id="cerrar-cliente" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Cerrar</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>	
+

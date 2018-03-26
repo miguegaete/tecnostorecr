@@ -1,0 +1,38 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			
+			<ul class="text-inicio" >
+			<li><h3>Controla tu negocio</h3></li>
+			<li><h3>Aplica estrategias en base a tus ventas</h3></li>
+			<li><h3>Sistema web facil y simple !</h3></li>
+			</ul>
+		
+		</div>
+		
+		<div class="col-md-6" style="border-left:1px solid lightgray;">
+			<form class="form-signin" name="form1" id="form1" method="post" action="" autocomplete="off">
+				<div class="row text-center" >
+				<img src="<?php echo ($this->empresa[0]->imagen!="")?$this->empresa[0]->imagen:""; ?>" style="max-width:150px; height:auto; margin-bottom:10px;" class="img-rounded">
+				</div>	
+				<h4>Bienvenido/a a <strong><?php echo $this->empresa[0]->nombre; ?></strong></h4>
+					<label for="usuario" class="sr-only">Usuario</label>
+					<input type="text" autocomplete="off" name="usuario" autofocus="" required=""  class="form-control" id="usuario" placeholder="Usuario">
+				<label for="password" class="sr-only">Contraseña</label>
+				<input type="password" autocomplete="off" name="password" autofocus="" required="" class="form-control" id="password" placeholder="Constraseña">
+				<br>
+				<button type="submit" class="btn btn-md btn-primary" >Entrar</button>		
+			</form>
+		</div>
+	
+	</div>
+</div>
+
+
+<div class="row-fluid footer-am">
+	<div class="col-md-12">
+		<footer>
+			© 2018 Devmobile | v1.6
+		</footer>
+	</div>
+</div>

@@ -1,0 +1,34 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="page-header">
+			  <h3 style="margin-bottom:0px;"><?php echo $this->title;?></h3>
+			</div> 
+		</div>
+	
+		<div class="col-md-12">
+			<form class="form1" id="form1" method="post" action="">
+				<div class="row">
+				<?php 
+					if(count($this->permisos)>0){
+						foreach($this->permisos as $aux){ ?> 
+						<div class="col-md-4">
+						  <div class="checkbox">
+							<label>
+								<input value="<?php echo $aux->id;?>" name="acceso[]" type="checkbox" <?php echo ($aux->activo)?checked:""; ?> > <?php echo $aux->nombre;?>
+							</label>
+						  </div>	
+						 </div>
+				<?php } } ?>
+				</div>
+				<hr>
+				<div class="form-group show-grid">
+					<button class="btn btn-primary" id="guardar" >Guardar cambios</button>
+					<button class="btn btn-danger" id="limpiar" >Limpiar</button>
+				</div>
+			</form>
+			<input type="hidden" value="<?php echo $this->id;?>" name="hddIdUsuario" id="hddIdUsuario">
+		</div>
+	</div>
+
+</div>

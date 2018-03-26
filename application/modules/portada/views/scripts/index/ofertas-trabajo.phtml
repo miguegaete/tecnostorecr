@@ -1,0 +1,11 @@
+	<div class="titulo-red">
+		<h2>Ofertas de Trabajo <span><a href="/ofertas-de-trabajo/">Ver todas las ofertas &gt;&gt;</a></span></h2>
+	</div>
+	
+	<?php foreach($this->ofertas as $aux){?>
+	<div class="listado-oferta">
+		<p class="txt-11"><?php echo  $aux->fecha;?></p>
+		<p class="txt-16"><a href="<?php echo  $aux->url;?>"><?php echo  $aux->nombre;?></a></p>
+		<p><?php echo  cortar_frase_mejorada($aux->descripcion,130,' ','...');?></p>
+	</div>
+	<?php } ?>

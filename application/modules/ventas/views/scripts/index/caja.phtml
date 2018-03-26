@@ -1,0 +1,176 @@
+<div class="container-fluid">
+	<div class="row">
+	  <div class="col-md-12">
+		<div class="page-header">
+		  <h2><?php echo $this->title;?></h2>  
+		</div>
+	  </div>
+	</div>
+
+	<div class="row show-grid"> 
+		<div class="col-md-12">
+		  <form name="filtro-fecha" method="post" action="">
+			<div class="row">
+				<div class="col-xs-4 col-sm-5 col-md-2">
+				  <input type="text" class="form-control" id="fecha1" autocomplete="false" name="fecha1" value="<?php echo ($this->fecha_filtro!="")?$this->fecha_filtro:date("d-m-Y");?>">
+				</div>
+				<div class="col-xs-4 col-sm-5 col-md-2">
+				  <input type="text" class="form-control" id="fecha2" autocomplete="false" name="fecha2" value="<?php echo ($this->fecha_filtro_hasta!="")?$this->fecha_filtro_hasta:date("d-m-Y");?>">
+				</div>				
+				
+				<div class="col-xs-3 col-sm-2 col-md-1">
+				  <button class="btn btn-default">Filtrar</button>
+				</div>
+				
+							
+			</div>
+		  </form>	
+		</div>
+	</div>
+	<div class="row">
+	  <div class="col-md-12">
+		<table id="table-caja" class="table table-bordered table-hover"  data-page-length="5" >
+			<thead>
+
+				<tr>
+					<th class="text-center" rowspan="2"  >N°</th>
+					<th class="text-center" rowspan="2">Fecha Apert.</th>
+					<th class="text-center" rowspan="2">Fecha Cierre</th>
+					<th class="text-center" rowspan="2">Tiempo</th>
+					<th class="text-center" rowspan="2">Vendedor</th>				
+					<th class="text-center" rowspan="2">Est.</th>
+					<th class="text-center" rowspan="2">Mont.<br>Inicial</th>
+					<th class="text-center" rowspan="2"></th>
+					<th class="text-center th-no-format" colspan="2" >DÉBITO</th>
+					<th class="text-center th-no-format" colspan="2">CRÉDITO</th>
+					<th class="text-center th-no-format" colspan="3" >CONTADO</th>
+					<th class="text-center"  rowspan="2">Notas de Crédito</th>
+				</tr>
+				<tr>
+					<td style="font-size:10px !important;">SUBTL.</td>
+					<td style="font-size:10px !important;">TOTL.<br>(-<?php echo $this->conf[0]->tbk_debito; ?>%)</td>
+					<td style="font-size:10px !important;">SUBTL</td>
+					<td style="font-size:10px !important;">TOTL.<br>(-<?php echo $this->conf[0]->tbk_credito; ?>%)</td>
+					<td style="font-size:10px !important;">SUBTL.</td>
+					<td style="font-size:10px !important;">DESC.</td>
+					<td style="font-size:10px !important;">TOTL.</td>
+				</tr>
+				
+
+			</thead>
+			<tbody>
+				<?php $total = 0; ?>
+			  <?php if (count($this->ventas)) {?>
+				  <?php foreach ($this->ventas as $aux) { ?>   
+						<?php $total+= $aux->total_int; ?>
+						<?php $subtotal+= $aux->subtotal_int; ?>
+						<?php $desc+= $aux->desc_int; ?>
+						<?php $total_efectivo+= $aux->total_efectivo_int; ?>
+						<?php $subtotal_efectivo+= $aux->subtotal_efectivo_int; ?>
+						<?php $desc_efectivo+= $aux->descuentos_efectivo_int; ?>						
+						<tr class="line-bottom">
+							<td class="text-center"><a href="" class="list-ventas" alt="<?php echo $aux->id.'_'.$aux->estado_num;?>"  ><?php echo "#".$aux->id;?></a></td>
+							<td class="text-center"><?php echo $aux->fecha_inicio;?></td>
+							<td class="text-center"><?php echo $aux->fecha_termino;?></td>
+							<td class="text-center"><?php echo $aux->tiempo_efectivo;?></td>
+							<td class="text-center"><?php echo $aux->usuario;?></td>
+							<td class="text-center"><?php echo $aux->estado;?></td>							
+							<td class="text-center"><?php echo $aux->monto_inicial;?></td>							
+							<td class="text-center"><a href="/venta/caja/<?php echo $aux->id; ?>/" target="_blank"><img src="/imagenes/documentos/icon-pdf.gif"></a></td>
+							<td class="text-right"><?php echo $aux->subtotal_debito;?></td>
+							<td class="text-right"><?php echo $aux->total_debito;?></td>
+							<td class="text-right"><?php echo $aux->subtotal_credito;?></td>
+							<td class="text-right"><?php echo $aux->total_credito;?></td>	
+							<td class="text-right"><?php echo $aux->subtotal_efectivo;?></td>
+							<td class="text-right"><?php echo $aux->descuentos_efectivo;?></td>
+							<td class="text-right"><?php echo $aux->total_efectivo;?></td>	
+							<td class="text-right danger"><?php echo $aux->total_notas;?></td>								
+							
+						</tr>  
+			  <?php } } ?>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-md-3">
+		<table class="table table-bordered">
+			<tbody>
+				<tr>
+				<td colspan="11" align="right" class="txt-bold">SubTotal</td>
+				<td><?php echo '$'.formatearValor($subtotal); ?></td>
+				</tr>
+				<tr>
+				<td colspan="11" align="right" class="txt-bold">Descuentos</td>
+				<td><?php echo '$'.formatearValor($desc); ?></td>
+				</tr>		
+				<tr>
+				<td colspan="11" align="right" class="txt-bold" >Total</td>
+				<td><?php echo '$'.formatearValor($total); ?></td>
+				</tr>	
+			</tbody>
+		</table>
+	</div>
+	</div>
+</div>
+
+<div class="modal fade bs-example-modal-lg modal-ventas" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="gridSystemModalLabel">Ventas Asociadas</h4>
+		</div>
+		<div class="modal-body">
+			
+				<div class="row show-grid">
+					
+					<div class="col-md-3">
+						<label for="id_caja_modal" >N° Caja</label>
+						<input type="text" class="form-control" id="id_caja_modal" name="id_caja_modal" readonly >
+						<input type="hidden" class="form-control" id="estado_caja" name="estado_caja" readonly >
+					</div>
+					<form class="form" name="form-addventa" id="form-addventa">
+					<div class="col-md-3">
+						<label for="id_venta_modal" >N° Venta</label>
+						<input type="text" class="form-control" id="id_venta_modal" name="id_venta_modal" >
+					</div>				
+					<div class="col-md-1">
+						<label for="" >&nbsp;</label>
+						<button type="button" class="btn btn-primary" id="validar-venta-caja">Agregar</button>
+					</div>
+					</form>
+				</div>
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>N°</th>
+							<th>ID Venta</th>
+							<th>Fecha</td>
+							<th>Total</td>
+							<th>Acción</td>
+						</tr>
+					</thead>
+					<tbody id="listado-ventas">
+					</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		</div>
+    </div>
+  </div>
+</div>
+<style>
+.th-no-format {
+background-color: #F0F0F0 !important;
+font-weight: bold !important;
+font-size: 12px !important;
+text-transform: uppercase !important;	
+}
+</style>
+
+
+

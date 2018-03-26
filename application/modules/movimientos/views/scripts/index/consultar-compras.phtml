@@ -1,0 +1,81 @@
+﻿<div class="container">
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="page-header">
+		<div class="row">
+			<div class="col-md-6">
+				<h3 style="margin-bottom:0px;"><?php echo $this->title;?></h3>
+			</div>
+			<div class="col-md-6 text-right">
+				<a href="/movimientos/comprar/" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#2eacce;"></span> <br>Comprar</a>
+			</div>
+			
+		</div>
+	</div>
+  </div>
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      
+    <div class="panel-body">
+      <!-- Table -->
+      <table class="table table-hover table-bordered" id="table-consultar-compras">
+        <thead>
+        <tr>
+          <th>N°</th>
+          <th>FECHA</th>
+          <th>DOCUMENTO</th>
+          <th>N° DE VENTA</th>
+          <th>PROVEEDOR</th>
+          <th>RUT</th>
+          <th>TIPO PAGO</th>
+          <th>TOTAL</th>
+        </tr>
+        </thead>
+
+        <tbody id="listado">
+        </tbody>  
+
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="gridSystemModalLabel">DETALLE DE COMPRA</h4>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table table-prop" id="table-prod-compras">
+					<thead>
+						<tr class="line-bottom" >
+							<th style="text-align:center !important;" >CANTIDAD</th>
+							<th>PRODUCTO</td>
+							<th style="text-align:center !important;" >PRECIO</td>
+							<th style="text-align:center !important;" >TOTAL</td>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-danger" data-dismiss="modal"> <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>  Cerrar</button>
+		</div>
+    </div>
+  </div>
+</div>
+
+
+

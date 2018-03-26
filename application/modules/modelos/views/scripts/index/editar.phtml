@@ -1,0 +1,62 @@
+<div class="container">
+	<div class="row">
+	  <div class="col-md-12">
+
+    <div class="page-header">
+		<div class="row">
+			<div class="col-md-6">
+				<h3 style="margin-bottom:0px;">Editando <?php echo $this->title;?></h3>
+			</div>
+			<div class="col-md-6 text-right">
+				<a href="/<?php echo $this->ruta;?>/" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color:#2eacce;"></span> <br><?php echo $this->title;?></a>
+				<a href="/<?php echo $this->ruta;?>/nuevo/" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#2eacce;"></span> <br>Añadir <?php echo $this->title;?></a>
+			</div>
+			
+		</div>
+	</div>
+	  </div>
+	  <div class="col-md-4">
+		<form name="form1" id="form1" method="post" action="" autocomplete="off">
+
+		  <div class="form-group">
+			<input type="hidden" class="form-control" id="tipo" name="tipo" value="1" >
+			<input type="hidden" class="form-control" id="id" name="id" required value="<?php echo ($this->modelo->id!="")?$this->modelo->id:''; ?>" >
+		  </div>
+		  <div class="form-group">
+			<label for="nombre">Nombre</label>
+			<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre Apellido" required value="<?php echo ($this->modelo->nombre!="")?$this->modelo->nombre:''; ?>" >
+		  </div>
+
+		  <div class="form-group"> 
+			<label for="telefono">Marca</label>
+			
+			<select id="marca" name="marca" class="form-control" required >
+				<option value="">Seleccionar Marca</option>
+			  <?php if (count($this->marcas)) { ?>
+				  <?php foreach ($this->marcas as $aux) { ?>  
+				  <?php if($this->modelo->id_marca == $aux->id){ ?>
+				  <option selected value="<?php echo $aux->id;?>"><?php echo $aux->nombre;?></option>
+				  <?php }else{ ?>				  
+					<option value="<?php echo $aux->id;?>"><?php echo $aux->nombre;?></option>
+				  <?php }}} ?>
+			</select>
+			
+		  </div> 		  
+
+		  <div class="form-group">
+			<label for="estado">Estado</label>
+			  <select name="estado" class="form-control" required>
+				<option value="">Seleccionar Estado</option>
+				<option <?php echo ($this->modelo->estado == 1 )?"selected":"" ?> value="1">Activo</option>
+				<option <?php echo ($this->modelo->estado == 0 )?"selected":"" ?> value="0">Inactivo</option>
+			  </select>
+		  </div>		  
+		  <button type="submit" class="btn btn-primary">Guardar</button> 
+		</form>
+	  </div>
+
+	</div>
+</div>
+
+
+

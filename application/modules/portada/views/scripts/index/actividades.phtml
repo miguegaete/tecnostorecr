@@ -1,0 +1,15 @@
+<input type="hidden" id="fechaActividad" value="<? echo $this->fecha;?>" />
+<div id="datepicker"></div>
+<!--p class="text-datepicker"><span class="dia-actual">D&iacute;a actual</span> <span class="dia-actividades">Con actividades</span></p-->
+	
+<!-- [LISTADO ACTIVIDADES] -->
+<?php foreach($this->listado_actividades as $actividades){ ?>
+<div class="item-listado item-listado-noimg" style="padding:20px 0 0 20px">                                                       
+    <a href="<?php echo $actividades->url;?>"><?php echo $actividades->titulo;?></a>
+    <span class="text-info"><?php echo $actividades->fecha->show();?></span>
+    <p><?php echo $actividades->resumen;?></p>
+</div>
+<? if(count($this->listado_actividades)>0){?>
+    <p class="text-align-right" style="padding:0 0 0 20px"><?php echo $this->translate->_("Ver más");?> <a href="<?php echo $this->url?>/<?php echo $this->translate->_("actividades"); ?>/"><?php echo $this->translate->_("actividades"); ?></a></p>
+<? }?>
+<?php }?>

@@ -1,0 +1,95 @@
+<div class="row-fluid">
+  <div class="col-md-12">
+
+    <div class="page-header">
+      <h2><?php echo $this->title;?></h2>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <form name="form1" id="form1" method="post" action="" > 
+      <div class="form-group">
+        <label for="desc">Descripcion</label>
+        <textarea class="form-control" id="desc" name="descripcion" required ><?php echo ($this->datos_editar->descripcion!="")?$this->datos_editar->descripcion:""; ?></textarea>
+      </div>    
+      <div class="form-group">
+        <label for="valor">Salida en Dinero</label>
+        <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <input type="text" class="form-control"  id="valor" placeholder="Monto" name="valor" required value="<?php echo ($this->datos_editar->valor!="")?$this->datos_editar->valor:""; ?>" autocomplete="off">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" id="guardar">Guardar</button>
+    </form>
+  </div>
+
+
+  <div class="col-md-7 col-md-offset-1">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->    
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="input-group">
+            <input type="text" class="form-control" id="search-table" placeholder="Buscar...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+				<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+			  </button>
+            </span>
+          </div><!-- /input-group -->
+
+        </div><!-- /.col-lg-6 -->
+
+        <div class="col-lg-7">
+      <form name="filtro-fecha" method="post" action="">
+        <div class="row">
+          <div class="col-xs-5">
+              <input type="text" class="form-control input-small" id="fecha1" name="fecha1" value="<?php echo ($this->fechaI!="")?$this->fechaI:date("d-m-Y 0:00");?>">
+            </div>
+            <div class="col-xs-5">
+              <input type="text" class="form-control" id="fecha2" name="fecha2" value="<?php echo ($this->fechaF!="")?$this->fechaF:date("d-m-Y 00:00")+1;?>">
+            </div>
+            <div class="col-xs-2">
+              <a href="#" class="btn btn-default" name="fechasfiltro" id="filtrar" value="1">Filtrar</a>
+            </div>
+          </div>
+      </form>
+          
+        </div>
+        <div class="col-lg-1">
+          <button class="btn btn-default" id="refresh"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></button>
+        </div><!-- /.col-lg-6 -->        
+      </div><!-- /.row -->
+    </div>
+    <div class="panel-body" style="height:350px; overflow-y:scroll;">
+    
+		<section>
+		  <div class="containers">
+		  <table class="table table-bordered table-hover" id="my-table">
+			<thead>
+			<tr class="header">
+
+			  <th>Descripcion</th>
+			  <th>Fecha</th>
+			  <th>Hora</th>
+			  <th>Valor</th>
+			  <th>Acción</th>
+			</tr>
+			</thead>
+
+			<tbody>
+			  
+			  
+			</tbody> 
+
+			</table>   
+			</div>
+		</section>
+    </div>
+		
+  </div>
+  </div>
+</div>
+<div id="mensaje-ajax">
+</div>
+

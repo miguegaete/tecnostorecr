@@ -1,0 +1,67 @@
+
+<p style="display: none" class="<?php echo $this->system_class;?>" id="system_msg"><?php echo $this->system_msg;?></p>
+<?php echo $this->nav; ?>
+<div class="estilo-pag">
+<div class="formulario-contacto">
+	<h1><?php echo $this->pagina->titulo; ?></h1>
+	<p><?php echo $this->pagina->texto; ?></p>
+	<form action="#" method="post" class="formulario ui-koalaform-formbox" id="form-contacto">
+		<fieldset>                                
+			<label for="nombre">* Nombres:</label>
+			<input type="text" tabindex="1" id="nombre" class="input novacio" title="Nombres" name="nombres"/>
+			<br />
+			<label for="apellido">* Apellidos:</label>
+			<input type="text" tabindex="2" id="apellido" class="input novacio" title="Apellidos" name="apellidos"/>
+			<br />
+			<label for="fono">* Teléfono:</label>
+			<input type="text" tabindex="3" id="fono" class="input novacio" title="Teléfono" name="telefono"/>
+			<br /> 		
+			<label for="email"> E-mail:</label>
+			<input type="text" tabindex="4" id="email" class="input email" title="E-Mail" name="email"/>
+			<br />                         
+			<label for="mensaje">* Mensaje:</label>
+			<textarea tabindex="5" class="novacio" id="mensaje" rows="7" cols="50" title="Mensaje" name="mensaje"></textarea>
+			<div class="caja-contacto">
+				<p>(*) Datos requeridos</p>
+				<input type="submit" tabindex="6" value="Enviar mensaje" id="boton-enviar" class="boton-enviar"/>
+			</div>
+		</fieldset>
+	</form>
+</div>
+
+<?php $cantidad = count($this->empresa_listado); 
+	  $count = 0; ?>
+<?php if(count($this->empresa_listado)>0){ ?>
+	<div class="contenido-empresa">
+	<div id="contenido-adicional">
+		<h2>Información de contacto</h2>
+		<?php foreach($this->empresa_listado as $aux){ ?>
+		<?php $count++;?>
+		<div class="padding-left-right <?php echo ( $count == $cantidad )?"":"separador-contenido-empresa"; ?>">
+			<p class="txt-14"><?php echo $aux->nombre; ?></p>
+			<p>Ubicaci&oacute;n: <?php echo $aux->direccion; ?> <br />
+			<?php if($aux->ubicacion){?>
+				<a  class="ubicacion_mapa" title="<?php echo $aux->direccion?>" href="/contacto/ubicacion/<?php echo $aux->id;?>/" class="cboxElement"> [Ver mapa]</a>
+			<?php }?>
+			</p>
+			<p>Teléfono: <?php echo $aux->telefono?></p>
+			<p>Email:<?php echo $aux->email?></p>
+		</div>
+		<?php } ?>
+
+		<!--<div class="padding-left-right">
+			<p class="txt-14">Oficionas Zona Sur - Puerto Montt</p>
+			<p>Ubicaci&oacute;n: <?php echo $this->empresa->direccion?> <br />
+			<?php if($this->empresa->ubicacion){?>
+				<a id="ubicacion_mapa" title="<?php echo $this->empresa->direccion?>" href="/contacto/ubicacion/" class="cboxElement"> [Ver mapa]</a>
+			<?php }?>
+			</p>
+			<p>Teléfono: <?php echo $this->empresa->telefono?></p>
+			<p>Email:<?php echo $this->empresa->email?></p>
+		</div>-->
+	</div>
+	</div>
+<?php } ?>
+	<div class="clear"></div>
+</div>
+<div class="sombra-bottom"></div>	

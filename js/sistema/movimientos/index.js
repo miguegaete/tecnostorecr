@@ -1,0 +1,11 @@
+$(function(){
+	
+	$("#table-mov").DataTable();
+	
+
+	
+
+	
+	
+	
+})

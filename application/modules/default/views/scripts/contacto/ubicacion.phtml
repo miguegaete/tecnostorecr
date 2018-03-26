@@ -1,0 +1,11 @@
+<?php 
+
+    echo $this->google(
+                'maps',
+                array(
+                    array('latlng'=>trim($this->empresa->ubicacion[0]).','.trim($this->empresa->ubicacion[1]), 'title'=>$this->empresa->nombre,'content'=>'<b>'.$this->empresa->nombre.'</b><br />'.$this->empresa->direccion)
+                    ), 
+                array('width'=>'600px','height'=>'500px','zoom'=>'15'));
+
+
+?>

@@ -1,0 +1,16 @@
+
+	<?php if(count($this->listado_noticias) > 0) { ?>
+		<div class="titulo-red">
+	        <h3><?php echo $this->translate->_('Noticias'); ?> <span><a href="/noticias/">Ver todas las noticias &gt;&gt;</a></span></h3>
+		</div>
+	        <?php foreach($this->listado_noticias as $noticia){ ?>
+	        <div class="item-listado">
+	                <a href="<?php echo $noticia->url;?>" class="link"><img src="<?php echo $noticia->imagen;?>" alt="<?php echo $noticia->titulo;?>" width="110" height="110" /></a>
+	                <div class="contenido-listado">
+					 			<p class="txt-11"><?php echo $noticia->fecha->show();?></p>
+	                        <p class="txt-16"><a href="<?php echo $noticia->url;?>"><?php echo $noticia->titulo;?></a></p>
+	                        <p><?php echo cortar_frase_mejorada($noticia->resumen,100,' ','...'); ?></p>
+	                </div>
+	        </div>
+	        <?php } ?> 
+	<?php } ?>

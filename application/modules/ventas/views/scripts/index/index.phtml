@@ -1,0 +1,778 @@
+
+
+<div id="caja-lock" <?php if($this->caja!=0){ echo "style='display:none;'"; }?>>
+	<button class="btn btn-success cssload-btn"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>  Iniciar Apertura de Caja</button>
+</div>
+
+
+
+	
+	<div class="container-fluid">
+			<div class="row" id="section-venta" >
+				<div class="col-xs-12 col-sm-8 col-md-8 border-right" >
+					<div class="panel panel-success border-bottom">
+						<div class="panel-body h-380">
+							<div class="container-fluid">
+							<div class="row h-370" >
+								<div class="col-md-12">
+									<table id="pedido" class="table" align="center">
+										<thead>
+											<tr>
+												<th colspan="5" style="text-align:center"><h4>Boleta Electrónica</h4></th>
+												
+											</tr>	
+										</thead>
+										<tbody>
+											<tr class="noPedido">
+												<td colspan="5" align="center">No existe venta en curso</td>
+											</tr>
+										</tbody>					  				
+									</table>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-success">
+						<div class="panel-body" style="">
+							<div class="row">
+								<div class="col-xs-6 col-md-9" id="detalle-caja">
+									<?php if($this->caja!=0){?>
+									<p style="margin-bottom:0;"><strong>APERTURA CAJA:</strong><?php echo $this->caja_inicio; ?> hrs. <strong>VENDEDOR:</strong><?php echo $this->usuario; ?></p>
+									<?php }else{ ?>
+									<p style="margin-bottom:0;">INICIE APERTURA CAJA</p>
+									<?php } ?>
+								</div>
+								<div class="col-xs-6 col-md-3 text-right">
+									<span id="liveclock"></span>
+								</div>
+							</div>						
+						</div>	
+					</div>
+					<div class="panel panel-success">
+					<div class="panel-body">
+					
+						<div class="row">
+							<div class="col-md-7">
+								<div class="row">
+									<div class="col-xs-6 col-md-6">
+										<select class="form-control chosen-select" name="tipo_venta" id="tipo_venta">
+											<option value="0" selected>Venta</option>
+											<option value="2">Devolución (Nota de Crédito Manual)</option>
+										</select>
+									</div>
+									<div class="col-xs-6 col-md-6 txt-center">
+										<a href="" id="sel_cliente"  class="btn btn-info"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Cliente</a>
+										<h5><b>Cliente: </b><span id="cliente-sel">No hay cliente seleccionado</span></h5>
+										<input type="hidden" id="rut_cliente_seleccionado" value="">
+									</div>	
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="row">
+								<div class="col-md-4 text-right">
+									<p style="margin-bottom:5px;font-size:18px;">SUBTOTAL</p>
+								</div>
+								<div class="col-md-8">
+									<input type="hidden" class="form-control" id="subtotal_a_pagar" name="subtotal_a_pagar" value="0" readonly >
+									<p id="subTotal" class="text-right" style="font-size:24px;margin-bottom:0px;font-weight:bold;">$0</p>
+								</div> 
+								<div class="col-md-4 text-right">
+									<p style="margin-bottom:5px;font-size:18px;">DESC.</p>
+								</div>
+								<div class="col-md-8">
+									<input type="hidden" class="form-control" id="descuentos_aplicados" name="descuentos_aplicados" value="0" readonly >
+									<p id="descuentos_aplicados_2" class="text-right" style="font-size:24px;margin-bottom:0px;font-weight:bold;">$0</p>
+								</div> 
+
+								<div class="col-md-4 text-right">
+									<p style="margin-bottom:5px;font-size:18px;">TOTAL</p>
+								</div>			
+								<div class="col-md-8">
+									<input type="hidden" class="form-control" id="total_a_pagar" name="total_a_pagar" value="0" readonly >
+									<p id="Total" class="text-right total" style="font-size:24px;margin-bottom:0px;font-weight:bold;">$0</p>							
+								</div>
+								</div>
+							</div>			
+							
+						</div>
+					
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="col-md-12 text-center">
+										
+										<a id="finalizar-2" class="btn btn-success btn-lg" href="#" role="button"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Finalizar (F1)</a>
+										<a id="cancelar" class="btn btn-warning btn-lg" href="##" role="button"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> Limpiar (Supr)</a>							
+										
+										<a id="cerrar-caja" <?php if($this->caja==0){ echo "style='display:none'"; }?>  alt="<?php echo $this->caja; ?>" class="btn btn-danger btn-lg" href="##" role="button">Cerrar Caja</a>							
+										<a id="add_cliente" class="btn btn-success btn-lg" href="#" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nuevo Cliente(F2)</a>
+										<a id="add_descuento" class="btn btn-success btn-lg" href="#" role="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Descuento</a>
+									</div>
+								</div>
+							</div>						
+						</div>	
+
+					</div>
+					</div>
+					
+				</div> 
+				<div class="col-xs-12 col-sm-4 col-md-4">
+				<div class="panel panel-success">
+					<div class="panel-body" style="height:600px;">
+					
+					<div class="container-fluid">
+					<div class="row">
+							
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<div class="input-group">
+								<div class="input-group-addon"><span class="glyphicon glyphicon-barcode" aria-hidden="true"></span></div> 
+								<input type="text" autocomplete="off" class="form-control" name="scanInput" id="scanInput"  placeholder="SKU">
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row" id="productos-2">
+						<div class="col-md-12">
+							<div class="form-group">
+								<div class="input-group">
+								<div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div> 						
+									<select class="form-control chosen-select pro" id="select-prod">
+										<option value="" selected >Seleccione un producto</option>
+										<?php if (count($this->producto)) { ?>
+										<?php foreach ($this->producto as $aux) { ?>
+										<option value="<?php echo $aux->id;?>" ><?php echo $aux->nombre.' - SKU['.$aux->sku.'] - '.$aux->stock; ?></option>
+										<?php }} ?>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div id="productos" class="row" style="height:300px;overflow:auto;">
+						<div class="col-md-12">
+						<button type="button" class="list-group-item">Por favor seleccione una categoría</button>
+						</div>
+					</div>
+					
+					<div id="categorias" class="row" style="height:205px;overflow:auto;">
+						<?php if (count($this->categoria)) { ?>
+							<?php foreach ($this->categoria as $aux) { ?>  
+								
+								<div class="col-xs-6 col-md-3">
+									<a  class="categoria-link" id="<?php echo $aux->id;?>" > <img src="" alt="<?php echo $aux->nombre_corto;?>" id="<?php echo $aux->id;?>" class="img-responsive thumbnail pro" title="'<?php echo $aux->nombre;?>" style="cursor:pointer; margin-bottom:0;"  data-placement="bottom"></a>
+									<p class="text-center txt-productos"><?php echo cortar_frase($aux->nombre,1);?></p>
+								</div>
+							<?php } ?>
+						<?php }
+						else { ?>
+							<div class="col-md-12">
+							<button type="button" class="list-group-item">No existen categorias</button>
+							</div>
+						<?php } ?>
+					</div>	
+
+					</div>
+
+
+					</div>
+				</div>
+				</div>			
+			</div>
+	</div>
+
+		<!--Modal lista Cliente-->
+		<div class="modal fade" id="mdalMontoInicial" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<form id="frmMontoIncial" name="frmMontoIncial" autocomplete="off">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Monto Inicial</h4>
+					</div>
+					<div class="modal-body">
+						
+						<div class="row">
+							<div class="col-md-12" style="margin-bottom:5px;">
+								<label for="txtMontoInicial"></label>
+								
+								<input type="number" class="form-control" name="txtMontoInicial" id="txtMontoInicial" required placeholder="$" >
+								<h3 id="lblMontoInicial" style="text-align:center;">$ </h3>
+							</div>							
+						</div>
+						
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Guardar</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+	
+	
+		<!--Modal lista Cliente-->
+		<div class="modal fade" id="modal_listar_cliente" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<form id="form-cliente-sel" name="form-cliente-sel" autocomplete="off">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Rut Cliente</h4>
+					</div>
+					<div class="modal-body">
+						
+						<div class="row">
+							<div class="col-md-12" style="margin-bottom:5px;">
+								<label for="formas_pagos">RUT</label>
+								<input type="hidden" class="form-control" name="tipo" id="tipo" value="0" >
+								<input type="text" class="form-control" name="rut" id="rut" required placeholder="RUT Completo" >
+								
+							</div>							
+						</div>
+						
+					</div>
+					<div class="modal-footer">
+						<button id="seleccionar-cliente" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Guardar</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+		<!--Modal Cliente-->
+		<div class="modal fade" id="modal_add_cliente" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<form id="form-cliente" name="form-cliente" autocomplete="off">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Nuevo Cliente</h4>
+					</div>
+					<div class="modal-body">
+						
+						<div class="row">
+							<div class="col-md-12" style="margin-bottom:5px;">
+								<label for="formas_pagos">RUT</label>
+								<input type="hidden" class="form-control" name="tipo" id="tipo" value="0" >
+								<input type="text" class="form-control" name="rut" id="rut" required placeholder="RUT Completo" >
+								
+							</div>
+							<div class="col-md-12" style="margin-bottom:5px;">
+								<label for="formas_pagos">Nombre</label>
+								<input  type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre Apellido" required>
+								
+							</div>	
+							<div class="col-md-12" style="margin-bottom:5px;">
+								<label for="email">Correo Electrónico</label>
+								<input type="mail" class="form-control" name="email" id="email" placeholder="ejemplo@gmail.com">
+								
+							</div>								
+						</div>
+						
+					</div>
+					<div class="modal-footer">
+						<button id="guardar-cliente" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Guardar</button>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>	
+		
+		<!--Modal Descuento-->
+		<div class="modal fade" id="modal_add_descuento" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<form id="form-descuento" name="form-descuento" autocomplete="off">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="myModalLabel">Aplicar Descuento</h4>
+					</div>
+					<div class="modal-body">
+						
+						<div class="row">
+							<!---div class="col-md-12" style="margin-bottom:5px;">
+								<label for="formas_pagos">Codigo de Descuento:</label>
+								<input type="hidden" class="form-control" name="tipo" id="tipo" value="0" >
+								<input type="text" class="form-control" name="codigo_descuento" id="codigo_descuento" placeholder="Ingrese código" >
+							</div-->
+							<div class="col-md-12" style="margin-bottom:5px;">
+								<label for="formas_pagos">Aplicar Descuento</label>
+								<select class="form-control" name="descuentos" id="descuentos" required>
+								</select>	
+								
+							</div>								
+						</div>
+						
+					</div>
+					<div class="modal-footer">
+						<button id="quitar-descuento" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Quitar</button>
+						<button id="guardar-descuento" type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Aplicar</button>
+						
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>			
+		
+		<!-- Finalizar una Venta -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-sm" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="venta_title">Finalizar Venta</h4>
+					</div>
+					<div class="modal-body">
+						<form id="form-venta" name="form-venta" autocomplete="off">
+							<div class="row">
+								<div class="col-md-12" style="margin-bottom:5px;">
+									<label for="formas_pagos" class="section_formas">FORMA DE PAGO</label>
+									<select class="form-control section_formas" name="formas_pagos" required id="formas_pagos">
+									</select>
+								</div>
+							</div>					
+							<div class="row">
+								<div class="col-md-12" style="margin-bottom:5px;">						
+									<label for="total_a_pagar" id="total_pagar_title">TOTAL A PAGAR</label>
+									<h3  class="text-center" id="total_a_pagar_2" style="margin-top:0px;" ></h3>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12" style="margin-bottom:5px;">						
+									<label for="monto_paga" class="section_monto">EFECTIVO</label>
+									<input type="text" class="form-control section_monto" id="monto_paga" name="monto_paga" value="" required >
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12" style="margin-bottom:5px;">						
+									<label for="vuelto" class="section_vuelto">VUELTO</label>
+									<input type="hidden" class="form-control section_vuelto" id="vuelto" name="vuelto" value="" readonly >
+									<h3 id="vuelto_2" style="margin-top:0px;" class="section_vuelto text-center" >$0</h3>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12" style="margin-bottom:5px;">						
+									<label for="vuelto" class="section_ticket">N° TRANSBANK</label>
+									<input type="text" required class="form-control section_ticket" id="ticket" name="ticket" value="" >						
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" id="finalizar-3" class="btn btn-success" form="form-venta"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Finalizar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="mensaje-load">
+		</div>
+		
+		
+<style type="text/css">
+
+#caja-lock {
+	background-color: rgba(255, 255, 255, 0.95);
+	height: 100%;
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+	z-index: 999;
+	opacity:0.9;
+	display:block;
+}
+.cssload-btn {
+	position: relative;
+	left: 35%;
+	left: calc(50% - 42px);
+		left: -o-calc(50% - 42px);
+		left: -ms-calc(50% - 42px);
+		left: -webkit-calc(50% - 42px);
+		left: -moz-calc(50% - 42px);
+	left: calc(50% - 42px);
+	top:40%;
+
+}
+
+
+@media print {
+  #wrapper {
+	display:none;
+  }
+  #modal_grafico_resumen{
+	  display:none;
+  }  
+  .impreso {
+    display:block !important;
+  }
+  * {
+	 font-family:"Helvetica Neue",Helvetica,Arial,sans-;
+  }
+  #head-1,#head-2,#content,#head-3 { 
+	width:100%;
+  }
+  #head-1,#head-3,#content,#head-2 {
+	margin-bottom:20px;
+  }
+
+  #head-1 > tbody > tr > td {
+	font-size:11px;
+	text-transform: uppercase;
+  }
+  #head-3 > tbody > tr > td {
+	font-size:11px;
+	text-transform: uppercase;
+  } 
+  #content > tbody > tr > td {
+	font-size:12px;
+	text-transform: uppercase;
+  }  
+  #head-2 > tbody > tr > td {
+	font-size:10px;
+  }    
+  .title-print{
+	text-transform: uppercase;
+	font-weight:bold;
+	font-size:14px !important;
+	margin-bottom:0px;
+	margin-top:0px;
+  }  
+  .font-11 {
+	font-size:11px;
+	text-transform: uppercase;
+  }
+  #final {
+	border-collapse:collapse;
+	width:302px;
+	border-width:0px;
+	border-style:solid;
+	border-color:#000;
+	
+	
+  }
+  #final > tbody > tr > td {
+	padding:15px;
+  }  
+}
+  .impreso {
+    display:none;
+  }
+  
+#head-1,#head-2,#content,#head-3, #head-4{
+	width:100%;
+  }
+  #head-1,#head-3,#content,#head-2 {
+	margin-bottom:20px;
+  }
+
+  #head-1 > tbody > tr > td {
+	font-size:11px;
+	text-transform: uppercase;
+  }
+  #head-3 > tbody > tr > td {
+	font-size:11px;
+	text-transform: uppercase;
+  } 
+  #head-4 > tbody > tr > td {
+	font-size:11px;
+	text-transform: uppercase;
+  }   
+  #content > tbody > tr > td {
+	font-size:12px;
+	text-transform: uppercase;
+  }  
+  #head-2 > tbody > tr > td {
+	font-size:10px;
+  }    
+  .title-print{
+	text-transform: uppercase;
+	font-weight:bold;
+	font-size:14px !important;
+	margin-bottom:0px;
+  }  
+  .font-11 {
+	font-size:11px;
+	text-transform: uppercase;
+  }
+  #final {
+	border-collapse:collapse;
+	width:302px;
+	border:0px solid #000;
+	
+	
+  }
+  #final > tbody > tr > td {
+	padding:15px;
+  }  
+
+</style>	
+
+
+
+		
+		
+
+		
+
+		<script>
+			//bodydisabled('disabled');
+			//setTimeout(function(){useDefaultPrinter();},15000);
+			
+			function imprimir(ped_id,tipo){
+
+				var productos;
+				var pedido;
+				
+				
+				//Llamada datosde los productos del pedido
+				$.ajax({
+					url:'/ventas/imprimir/'+ped_id+'/'+1+'/',
+					async: true,
+					dataType: "json",
+					success:
+					function(response){
+						//printHTML(response,false);
+						//printHTML(response,true);
+
+						if(tipo==2){
+							enviarImpresoraNota(response,true);
+						}else{
+							enviarImpresora(response,true); 
+						}
+					}
+				});			
+			}
+		
+				
+function enviarImpresora(response,valor,tipo) {
+	
+	var f = new Date();
+	var fecha = response[0].fecha;
+	var hora = response[0].hora;
+	var mesa = (response[0].mesa!=0)?response[0].mesa:'Entrega';
+	var total = response[0].total;
+	var subtotal = response[0].subtotal;
+	var descuento = response[0].descuento;
+	var sizef = (valor)?2:2;
+	var numeroped = response[0].id;
+	var vendedor = response[0].usuario;
+	
+	var nombre_empresa= response[1].nombre;
+	var fono_empresa= response[1].fono;
+	var dir_empresa= response[1].direccion;
+	
+	var descripcion = (response[0].descripcion!='nulo')?response[0].descripcion:'Sin descripci&oacute;n';
+
+    // Preserve formatting for white spaces, etc.
+    var colA = '<table border=0 cellpadding=1 cellspacing=0 width=100%><tr><td align=center><font size=3 ><b>'+nombre_empresa+'</b></font></td></tr>';
+        colA = colA +'<tr><td align=center><font align=center size=1 ><b>Tel. '+fono_empresa+'</b></font></td></tr>';
+        colA = colA +'<tr><td align=center><font align=center size=1 ><b>Dir. '+dir_empresa+'</b></font></td></tr>';
+		colA = colA +'<tr>';
+		colA = colA +'<td align=center><hr width=100%></td>';
+		colA = colA +'</tr>';          
+		colA = colA +'</table>';
+		colA = colA +'<table border=0 cellpadding=1 cellspacing=0 width=100% >';
+		colA = colA +'<tr>';
+		colA = colA +'<td align=left ><font size=1 ><strong>Fecha:</b></strong></td>';
+		colA = colA +'<td align=left ><font size=1 >'+fecha+'</font></td>';
+		colA = colA +'<td align=left ><font size=1 ><strong>Hora:</strong></font></td>';
+		colA = colA +'<td align=left ><font size=1 >'+hora+'</font></td>';
+		colA = colA +'</tr>';  	
+		colA = colA +'<tr>';             
+		colA = colA +'<td align=left ><font size=1 ><strong>Venta:</strong></font></td>';
+		colA = colA +'<td align=left ><font size=1 >'+numeroped+'</font></td>';	
+		colA = colA +'<td align=left ><font size=1 ><strong>Vendedor:</strong></font></td>';
+		colA = colA +'<td align=left ><font size=1 >'+vendedor+'</font></td>';	
+		colA = colA +'</tr>';   
+		colA = colA +'<tr>';
+		colA = colA +'<td align=center colspan=4><hr width=100%></td>';
+		colA = colA +'</tr>';  		
+		colA = colA +'</table>';    
+		   
+
+	colA = colA + '<table border=0 cellpadding=1 cellspacing=0 align=center width=100% >';
+	colA = colA +'<tr>';
+	colA = colA +'<td><font size=1>CAN.</font></td>';
+	if(valor){
+	colA = colA +'<td><font size=1>VAL.</font></td>';
+	}
+	colA = colA +'<td><font size=1>DESC.</font></td>';
+	if(valor){
+	colA = colA +'<td><font size=1>TOTAL</font></td>';	
+	}	
+	for(i=2;i<response.length;i++){
+		var precio = (valor)?'$'+format(response[i].precio)+'&nbsp;':'';
+		colA = colA +'</tr>';	
+		colA = colA +'<tr>';
+		colA = colA +'<td valign=top ><font size='+sizef+'>'+response[i].cantidad+'&nbsp;x&nbsp;</font>&nbsp;</td>';
+		colA = colA +'<td valign=top ><font size='+sizef+'>'+precio+'</font></td>';
+		colA = colA +'<td valign=top ><font size='+sizef+'>'+response[i].categoria+'.'+response[i].nombre+'</font></td>';
+		if(valor){
+		colA = colA +'<td valign=top ><font size='+sizef+'>$'+format(response[i].valor)+'</font></td>';	
+		}
+		colA = colA +'</tr>';		
+	}
+		colA = colA +'<tr>';
+		colA = colA +'<td align=center colspan=4><hr width=100%></td>';
+		colA = colA +'</tr>';  	
+	if(valor){
+		colA = colA +'<tr>';	
+		colA = colA +'<td colspan=4 >&nbsp;</td>';	
+		colA = colA +'</tr>';			
+		colA = colA +'<tr>';	
+		colA = colA +'<td align=right colspan=3 ><font size=2><strong>SUBTOTAL&nbsp;</strong></font></td>';	
+		colA = colA +'<td align="right" ><font size=2><strong>$'+format(subtotal)+'</strong></font></td>';	
+		colA = colA +'</tr>';
+		colA = colA +'<tr>';	
+		colA = colA +'<td align=right colspan=3 ><font size=2><strong>DESC.&nbsp;</strong></font></td>';	
+		colA = colA +'<td align="right" ><font size=2><strong>$'+format(descuento)+'</strong></font></td>';	
+		colA = colA +'</tr>';		
+		colA = colA +'<tr>';	
+		colA = colA +'<td align=right colspan=3 ><font size=2><strong>TOTAL&nbsp;</strong></font></td>';	
+		colA = colA +'<td align="right"><font size=2><strong>$'+format(total)+'</strong></font></td>';	
+		colA = colA +'</tr>';
+		
+	} 	
+		colA = colA +'</table>';
+		
+	
+    //qz.setCopies(3);
+    //qz.setCopies(parseInt(1));
+
+    // Append our image (only one image can be appended per print)
+    
+         
+        var boleta = '<table border=0 cellpadding=0  cellspacing=0 width="200" align=center>' +				
+                '<tr>' +
+                    '<td>' + colA + '</td>' +
+                '</tr>' +
+                '</table>';
+				
+		$(".impreso").html(boleta);
+
+		window.print();
+}				
+
+			function enviarImpresoraNota(response,valor) {
+				
+				var f = new Date();
+				var fecha = response[0].fecha;
+				var hora = response[0].hora;
+				var mesa = (response[0].mesa!=0)?response[0].mesa:'Entrega';
+				var total = response[0].total;
+				var subtotal = response[0].subtotal;
+				var titulo = "NOTA DE CRÉDITO";
+				var numeroped = response[0].id;
+				var nombreempresa = response[1].nombre;
+				var telefono = response[1].fono;
+				var direccion = response[1].direccion;
+				var rut = response[1].rut;
+				var ciudad = 'CORONEL';
+				var actividad = 'VENTA DE ARTÍCULOS ELECTRÓNICOS';
+				
+				var descripcion = (response[0].descripcion!='nulo')?response[0].descripcion:'Sin descripci&oacute;n';
+
+				// Preserve formatting for white spaces, etc.
+				
+				var colA = '<p class="title-print">'+nombreempresa+', '+ciudad+'</p>';
+				if(valor){
+					
+					colA = colA +'<table id="head-1"><tbody>';
+					colA = colA +'<tr><td>'+direccion+'</td></tr>';
+					colA = colA +'<tr><td>RUT: '+rut+'</td></tr>';
+					colA = colA +'<tr><td>'+actividad+'</td></tr>';
+					colA = colA +'<tr><td>FONO: '+telefono+'</td></tr>';
+					colA = colA +'</tbody></table>';
+					//Table fin Head 1
+					
+					
+
+
+				}
+					//colA = colA +'<p class="font-11">VENDEDOR(A): '+response[0].cajero+' <p>';
+					
+					
+					colA = colA +'<table id="head-3"><tbody>';
+					colA = colA +'<tr>';                     
+					if(valor){
+					colA = colA +'<td align="left"><b>NOTA DE CRÉDITO<b></td>';
+					colA = colA +'<td align="right">N°_: '+numeroped+'</td>';	
+					}
+					colA = colA +'</tr>';     		
+					colA = colA +'</tbody></table>';  
+					//Fin table head 2
+					   
+
+					colA = colA + '<table id="content"><tbody>';
+					
+				for(i=2;i<response.length;i++){
+					var precio = (valor)?format(response[i].precio)+'&nbsp;':'';
+					
+						colA = colA +'<tr><td colspan="4">'+response[i].nombre+'</td></tr>';
+						colA = colA +'<tr>';
+						colA = colA +'<td align="center">'+response[i].cantidad+'</td>';
+						colA = colA +'<td align="center">X</td>';
+						colA = colA +'<td>'+precio+'</td>';
+						colA = colA +'<td align="right">'+format(response[i].valor)+'</td>';	
+						colA = colA +'</tr>';		
+
+				} 	
+					
+					colA = colA +'<tr>';	
+					colA = colA +'<td colspan="3" align="right"><p class="title-print">SUBTOTAL</p></td>';	
+					colA = colA +'<td align="right">'+format(subtotal)+'</td>';	
+					colA = colA +'</tr>';
+					/*colA = colA +'<tr>';	
+					colA = colA +'<td colspan="3" align="right"><p class="title-print">IVA(19%)</p></td>';	
+					colA = colA +'<td align="right">'+format(0)+'</td>';	
+					colA = colA +'</tr>';					
+					colA = colA +'<tr>';*/	
+					colA = colA +'<td colspan="3" align="right"><p class="title-print">TOTAL A PAGAR</p></td>';	
+					colA = colA +'<td align="right">'+format(total)+'</td>';	
+					colA = colA +'</tr>';					
+					colA = colA +'</tbody></table>'
+				
+					colA = colA +'<table id="head-2"><tbody>';
+					colA = colA +'<tr>';
+					colA = colA +'<td align="left">Fecha: '+fecha+'</td>';
+					colA = colA +'<td align="right">Hora: '+hora+'</td>';
+					colA = colA +'</tr>'; 		
+					colA = colA +'</tbody></table>';				
+				
+					var boleta = '<table id="final" align="center">' +				
+							'<tr>' +
+								'<td>' + colA + '</td>' +
+							'</tr>' +
+							'</table>';
+							
+					$(".impreso").html(boleta);
+
+					window.print();
+			}
+				
+
+
+			
+			
+			$(function () {
+			  $('[data-toggle="tooltip"]').tooltip();
+			  $('[data-toggle="popover"]').popover({delay:{"hide":2000},trigger:"hover"})
+			  
+		$(document).ajaxStart(function(){
+		
+			$("#section-venta a").attr("disabled", "disabled");
+
+			
+		});
+		
+		$(document).ajaxStop(function(){
+			
+			$("#section-venta a").removeAttr("disabled");
+
+			
+		});				  
+			})
+		</script>

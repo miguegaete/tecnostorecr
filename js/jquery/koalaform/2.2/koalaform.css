@@ -1,0 +1,49 @@
+
+/*
+ * jQuery UI CSS Framework @VERSION
+ *
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Theming/API
+ *
+ * To view and modify this theme, visit http://jqueryui.com/themeroller/
+ */
+
+/* Overlays */
+.ui-widget-overlay { background: #aaaaaa; opacity: .3;filter:Alpha(Opacity=30); }
+/* Icons
+----------------------------------*/
+.ui-state-highlight .ui-icon.ui-icon-alert{ width: 20px; height: 20px;  background: url(imagenes/icon-error.png) no-repeat 0 0; }
+.ui-state-highlight .ui-icon.ui-icon-ok{ width: 20px; height: 20px;  background: url(imagenes/icon-ok.png) no-repeat 0 0; }
+.ui-state-highlight .ui-icon.ui-icon-clock{ width: 20px; height: 20px;  background: url(imagenes/ajax-loader.gif) no-repeat 0 2px; }
+/* Misc visuals
+----------------------------------*/
+.ui-state-highlight{
+    border: 1px solid #FD9D80;
+    background: #FFF5F1;
+    color: #333;
+    text-align: left;
+	border-top: none;
+}
+
+.ui-state-highlight.ui-state-highlight-exito {
+    background: none repeat scroll 0 0 #EEFFC7;
+    border: 1px solid #D3D772;
+    color: #333333;
+    text-align: left;
+}
+
+.ui-state-highlight.ui-state-highlight-error {
+    background: none repeat scroll 0 0 #FFF5F1;
+    border: 1px solid #FD9D80;
+    color: #333333;
+    text-align: left;
+}
+
+#koalaFormBox ul{ list-style: none; margin-left: 24px; margin-top: 7px;}
+#koalaFormBox ul li{ margin-bottom: 0px; font-size: 1em; line-height:17px; }
+#koalaFormBox b{ color: #333333; }
+.ui-state-error{ border: 1px solid red !important; color: #CD0A0A !important; }
+#koalaFormBox ul li{ font-size:12px;}

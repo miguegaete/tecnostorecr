@@ -1,0 +1,89 @@
+﻿<div class="container">
+<div class="row">
+  <div class="col-md-12">
+    <div class="page-header">
+		<div class="row">
+			<div class="col-md-6">
+			<h3 style="margin-bottom:0px;"><?php echo $this->title;?></h3>
+			</div>
+		</div>
+    </div> 
+  </div>
+</div>
+	<div class="row show-grid"> 
+		<div class="col-md-12">
+		  <form name="filtro-fecha" method="post" action="">
+			<div class="row">
+				<div class="col-xs-4 col-sm-5 col-md-2">
+				  <select id="mes" name="mes" class="form-control">
+					<option>-- Seleccione Mes --</option>
+					<?php foreach($this->meses as $aux){ ?>
+					<option <?php echo ($this->mes == $aux->num)?"selected":""; ?> value="<?php echo $aux->num; ?>"><?php echo $aux->mes; ?></option>
+					<?php } ?>
+				  </select>
+				</div>	
+				<div class="col-xs-4 col-sm-5 col-md-2">
+				  <select id="anio" name="anio" class="form-control">
+					<option>-- Seleccione Año --</option>
+					<?php foreach($this->anios as $aux){ ?>
+					<option <?php echo ($this->anio == $aux->anio)?"selected":""; ?> value="<?php echo $aux->anio; ?>"><?php echo $aux->anio;?></option>
+					<?php } ?>
+				  </select>
+				</div>					
+				
+				<div class="col-xs-3 col-sm-2 col-md-1">
+				  <button class="btn btn-default">Filtrar</button>
+				</div>			
+			</div>
+		  </form>	
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+		<div class="panel panel-default">
+		<div class="panel-body">
+		  <!-- Table -->
+		  <table class="table table-bordered table-hover" id="table-mov">
+			<thead>
+			<tr>
+				
+			  <th>N°</th>
+			  <th>Código SKU</th>
+			  <th>Producto</th>
+			  <th>Saldo Inicial</th>
+			  <th>Entradas</th>
+			  <th>Salidas</th>
+			  <th>Saldo</th>
+			  
+		  
+			  
+			</tr>
+			</thead>
+
+			<tbody>
+			  <?php if (count($this->saldos)) { ?>
+				  <?php foreach ($this->saldos as $aux) { ?>    
+					<tr>
+						<td><?php echo $aux->num;?></td>
+						<td><?php echo $aux->sku;?></td>
+						<td><?php echo $aux->nombre;?></td>
+						<td><?php echo $aux->saldo_inicial;?></td>
+						<td class="success"><?php echo $aux->entrada;?></td>
+						<td class="danger"><?php echo $aux->salida;?></td>
+						<td><?php echo $aux->stock;?></td>
+					</tr>
+				  <?php } ?>
+			  <?php }else{ ?>
+					<tr>
+					  <td colspan="5" align="center">No existen registros.</td>
+					</tr>
+			  <?php } ?>
+			  
+			</tbody>  
+
+		  </table>
+		</div>
+		</div>
+		</div>
+	</div>
+</div>

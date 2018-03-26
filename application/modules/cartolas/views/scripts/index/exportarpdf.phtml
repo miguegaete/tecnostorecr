@@ -1,0 +1,26 @@
+ <?php        
+		
+				
+		/*$html = "<table class=table table-bordered >";
+		$html.= "<thead><tr><th>ID</th><th>Fecha</th><th>TIPO</th><th>VALOR</th></tr></thead>";
+		$html.= "<tbody>";
+		if (count($this->listado)) { 
+			foreach ($this->listado as $aux) { 
+				$html.= "<tr><td>".$aux->id."</td><td>".$aux->fecha."</td><td>".$aux->tipo."</td><td>".$aux->valor."</td></tr>";
+			}
+		}
+		$html.= "</tbody>";
+		$html.= "</table>";*/
+			  
+		
+		$html = $this->listado;
+		
+		//echo $html;
+		
+        $mpdf= new PDF_AutoPrint('utf-8');
+        $mpdf->WriteHTML($html);
+        //$mpdf->AutoPrint(false);
+        $mpdf->Output();
+
+
+?>

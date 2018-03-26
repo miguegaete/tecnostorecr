@@ -1,0 +1,91 @@
+﻿<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="page-header">
+					<div class="row">
+						<div class="col-md-6">
+							<h3 style="margin-bottom:0px;"><?php echo $this->title;?></h3>
+						</div>
+						<div class="col-md-6 text-right">
+								<a href="/movimientos/" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color:#2eacce;"></span><br>Movimientos</a>
+						</div>
+					</div>	
+				</div> 
+			</div>
+
+			<div class="col-md-12">
+				<form class="form-horizontal" name="form2" id="form2" method="post" action="" >
+					<div class="form-group">
+						<label for="sku"></label>
+						<div class="col-md-4"> 
+						<input type="number" required class="form-control " id="sku" name="sku" placeholder="Código de Barra" >
+						</div>
+						<div class="col-md-1">
+							<button type="submit" class="btn btn-success" title="Cargar Datos" ><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button>
+						</div>
+					</div>
+				</form>	
+				<hr>
+			</div>
+
+
+			<div class="col-md-12" style="margin-top:10px;">
+				<form name="form1" id="form1" method="post" action="" enctype="multipart/form-data" autocomplete="off"> 
+				<div class="form-group">
+					<h3>Información del Producto</h3>
+					<hr>
+					<div class="row">
+						<div class="col-md-12">
+						<div class="row">
+						<div class="col-md-3">
+						<label for="codigo">Código de Barra</label>
+						<input type="text" class="form-control lectura" id="cod" name="cod" readonly>
+						<input type="hidden" class="form-control" id="id" name="id" required readonly>
+						</div>
+						<div class="col-md-4">
+							<label for="nombre">Nombre Producto</label>
+							<input type="text" class="form-control lectura" required id="nombre" name="nombre"  readonly >				
+						</div>
+						<div class="col-md-2">
+							<label for="precio">Precio</label>
+							<input type="text" class="form-control lectura" id="precio" name="precio"  readonly >				
+						</div>
+							<div class="col-md-1">
+								<label for="stock">Stock</label>
+								<input type="text" class="form-control lectura" id="stock" name="stock" readonly >				
+							</div>	
+							<div class="col-md-2">
+								<label for="stock_nuevo">Nuevo-Stock</label>
+								<input type="text" class="form-control lectura" id="stock_nuevo" name="stock_nuevo" readonly >				
+							</div>			
+						</div>
+						<hr> 
+						<h3>Ingrese Movimiento</h3>
+						<hr>  
+						<div class="row">
+							<div class="col-md-1">
+								<label for="descripcion">Cantidad</label>
+								<input type="text" class="form-control" id="cantidad" name="cantidad" maxlength="7" required >
+							</div>		
+							<div class="col-md-3">
+								<label for="tipo">Tipo de Movimiento</label>
+								<select required name="tipo" class="form-control" id="tipo">
+										<option value="">Seleccione Opción</option>
+										<option value="Entrada">Entrada de Producto</option>
+										<option value="Salida">Salida de Producto</option>
+								</select>
+								
+							</div>			
+						</div>
+						</div>
+					</div>
+				</div> 	    
+				<div class="form-group text-left">
+					<button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;Guardar cambios</button>  
+				</div> 
+				<hr>  				
+				</form>
+			</div>
+
+</div> 
+</div>

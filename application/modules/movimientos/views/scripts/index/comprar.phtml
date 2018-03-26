@@ -1,0 +1,149 @@
+﻿
+<div class="container">
+<div class="row">
+	<div class="col-md-8">
+		<div class="row show-grid">
+			<div class="col-md-12">
+				<form name="buscar" id="buscar" action="" method="post">
+					
+						<select class="form-control chosen-select pro" id="select-prod">
+										<option value="" selected >Seleccione un producto</option>
+										<?php if (count($this->producto)) { ?>
+										<?php foreach ($this->producto as $aux) { ?>
+										<option value="<?php echo $aux->id;?>" ><?php echo $aux->nombre.' - ['.$aux->sku.']'; ?></option>
+										<?php }} ?>
+						</select>
+					
+				
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>ITEM</th>
+							<th>CANT.</th>
+							<th>PRODUCTO</th>
+							<th>PRECIO</th>
+							<th>IMPORTE</th>
+							<th></th>
+						</tr>
+						
+					</thead>
+					<tbody id="content-productos" >
+						<tr>
+							<td colspan="6" align="center">No existen registros en la compra</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-12 botonera text-center">
+					<button class="btn btn-info" id="btnGuardarCompra" disabled >Guardar compra</button>
+					<button class="btn btn-danger" id="btnVaciarCarro" disabled >Vaciar carrito</button>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-4">
+		<div class="row">
+			<div class="col-md-12 text-center danger">
+				<div class="cont-price-vender"><h1 id="h1total">$ 0</h1></div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+				<form class="form-horizontal form-conf-vc" id="form-comprar" name="form-comprar">
+					<div class="row show-grid">
+						<div class="col-md-6">
+							<div>
+								<label>Documento</label>
+								<select class="form-control chosen-select" id="ddlDocumento" name="ddlDocumento" required >
+									<?php if (count(documentos)) { ?>
+									<?php foreach ($this->documentos as $aux) { ?>
+										
+										<option value="<?php echo $aux->id;?>" <?php echo ($aux->id == 2 )?"selected":"";?> ><?php echo $aux->nombre; ?></option>
+									<?php }} ?>									
+								</select>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div>
+								<label>TIPO PAGO</label>
+						<select class="form-control chosen-select" id="ddlFormaPago" name="ddlFormaPago" required >
+										<?php if (count($this->formas)) { ?>
+										<?php foreach ($this->formas as $aux) { ?>
+										<option value="<?php echo $aux->id;?>" ><?php echo $aux->nombre; ?></option>
+										<?php }} ?>
+						</select>
+							</div>
+						</div>						
+					</div>
+					<div class="row show-grid">
+						<div class="col-md-12">
+							<div>
+								<label>N° DE VENTA</label>
+								<input type="text" id="txtNumero" name="txtNumero"  required class="form-control">
+							</div>
+						</div>						
+					</div>	
+					<div class="row show-grid">
+						<div class="col-md-12">
+							<div>
+								<label>PROVEEDOR</label>
+								<select class="form-control chosen-select" name="ddlProveedores" id="ddlProveedores" required >
+												<?php if (count($this->proveedores)) { ?>
+												<?php foreach ($this->proveedores as $aux) { ?>
+												<option value="<?php echo $aux->id;?>" ><?php echo $aux->nombre; ?></option>
+												<?php }} ?>
+								</select>								
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div>
+								<label for="txtFechaCompra">FECHA COMPRA</label>
+								<input type="text" class="form-control " id="txtFechaCompra" name="txtFechaCompra"  value="<?php echo date('d-m-Y');?>">
+							</div>
+						</div>						
+					</div>	
+					<hr>
+					
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-unstyled">
+								<tr>
+									<td align="left">SUB TOTAL</td>
+									<td align="right">
+										<label id="lblSubTotal">$ 0</label>
+										<input type="hidden" name="txtsubtotal" id="txtsubtotal" >
+									</td>
+								</tr>
+								<tr>
+									<td align="left">IVA(<?php echo $this->iva;?> %)</td>
+									<td align="right">
+										<label id="lblIVA">$ 0</label>
+										<input type="hidden" name="txtIVAvalor" id="txtIVAvalor" value="<?php echo $this->iva;?>" >
+										<input type="hidden" name="txtiva" id="txtiva"  >
+									</td>
+								</tr>
+								<tr>
+									<td align="left">TOTAL</td>
+									<td align="right" >
+										<label id="lblTotal">$ 0</label>
+										<input type="hidden" name="txttotal" id="txttotal" >
+									</td>
+								</tr>							
+							</table>
+						</div>
+					</div>
+					
+				</form>
+			</div>
+		</div>		
+	</div>
+</div>
+</div>

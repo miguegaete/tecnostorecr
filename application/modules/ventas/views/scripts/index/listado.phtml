@@ -1,0 +1,339 @@
+<div class="container">
+	<div class="row">
+	  <div class="col-md-12">
+		<div class="page-header">
+		  <h2><?php echo $this->title;?></h2>  
+		</div>
+	  </div>
+	</div>
+
+	<div class="row show-grid"> 
+		<div class="col-md-12">
+		  <form name="filtro-fecha" method="post" action="">
+			<div class="row">
+				<div class="col-xs-3 col-sm-3 col-md-2">
+				  <input type="text" class="form-control" id="fecha1" autocomplete="false" name="fecha1" value="<?php echo ($this->fecha_filtro!="")?$this->fecha_filtro:date("d-m-Y");?>">
+				</div>
+				<div class="col-xs-3 col-sm-3 col-md-2">
+				  <input type="text" class="form-control" id="fecha2" autocomplete="false" name="fecha2" value="<?php echo ($this->fecha_filtro2!="")?$this->fecha_filtro2:date("d-m-Y");?>">
+				</div>				
+				
+				<div class="col-xs-1 col-sm-2 col-md-1">
+				  <button class="btn btn-default">Filtrar</button>
+				</div>
+				
+							
+			</div>
+		  </form>	
+		</div>
+	</div>
+	<div class="row">
+	  <div class="col-md-12">
+		<table id="table" class="table table-bordered table-hover table-resp">
+			<thead>
+				<tr>
+					<th>N°</th>
+					<th>Código</th>
+					<th>Fecha</th>
+					<th>Hora</th>
+					<th>Tipo</th>
+					<th>Vendedor</th>
+					<th>Productos</th>
+					<th>Forma de Pago</th>
+					<th>Subtotal</th>
+					<th>Descuento</th>
+					<th>Total</th>
+					<th>Acciones</th>
+				</tr>
+
+			</thead>
+			<tbody>
+			<?php $cont=0;?>
+			  <?php if (count($this->ventas)) {?>
+				  <?php foreach ($this->ventas as $aux) { 
+				  $total = $aux->total_venta;
+				  $subtotal = $aux->total_subtotal;
+				  $desc = $aux->total_descuento;
+				  $total_credito = $aux->total_credito;
+				  $total_debito = $aux->total_debito;
+				  $total_credito_real = $aux->total_credito_real;
+				  $total_debito_real = $aux->total_debito_real;	
+				  $total_credito_desc = $aux->total_credito_desc;
+				  $total_debito_desc = $aux->total_debito_desc;
+				  $total_efectivo = $aux->total_efectivo;
+				  $total_nota = $aux->total_nota;
+				  $total_efectivo_caja = $aux->total_efectivo_caja;
+				  $total_global = $aux->total_global;
+				  $cont++;
+				  ?>   
+						
+						<tr id="<?php echo "tr_".$aux->id;?>">
+							<td data-label="N°"><?php echo $cont;?></td>
+							<td data-label="Código"><?php echo "#".$aux->id;?></td>
+							<td data-label="Fecha" class="text-center"><?php echo $aux->fecha;?></td>
+							<td data-label="Hora"><?php echo $aux->hora;?></td>
+							<td data-label="Tipo"><?php echo $aux->tipo;?></td>
+							<td data-label="Vendedor"><?php echo $aux->usuario;?></td>
+							<td data-label="Productos"><a href="" class="productos" alt="<?php echo $aux->id;?>" ><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span></a></td>
+							<?php if($aux->id_forma==2 || $aux->id_forma==3){ ?>
+								<td data-label="Total"><?php echo $aux->forma. ' <strong>[N°:'.$aux->ticket_transbank.']</strong>';?></td>
+							<?php }else{ ?>
+								<td data-label="Total"><?php echo $aux->forma;?></td>
+							<?php } ?>	
+							<td data-label="Total" nowrap ><?php echo $aux->subtotal;?></td>
+							<td data-label="Total" nowrap ><?php echo $aux->descuento;?></td>
+							<td data-label="Total" nowrap ><?php echo $aux->total;?></td>
+							<td align="center" data-label="Documento" nowrap >
+								<a href="#" title="Imprimir Documento de Venta" class="imp-doc" id="<?php echo $aux->id.'_'.$aux->id_tipo; ?>"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a>
+								<?php if($this->tipo_usuario == 1){ ?>
+									<a href="#" title="Eliminar Venta" class="eliminar" id="<?php echo $aux->id.'_'.$aux->id_tipo; ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+								<?php } ?>
+							</td>
+							
+						</tr>
+			  <?php } }else{ ?>
+							
+							<!--tr><td colspan='12' class='text-center'>No existen resultados</td></tr-->
+			  
+			  <?php }?>
+			  <!--tr class="tr-resp-total">
+				
+				<td colspan="8"></td>
+				<td><?php echo $subtotal;?></td>
+				<td><?php echo $desc;?></td>
+				<td><?php echo $total;?></td>
+				<td></td>
+			  
+			  </tr-->
+			  </tbody>
+			  </table>
+			  
+
+	</div>
+	<div class="col-md-6">
+			  <table class="table" >
+				<tbody>
+			  <tr>
+				<td colspan="3"><strong>TOTAL VENTAS EFECTIVO</strong></td>
+				<td><strong><span class="text-success">(+)</span></strong> <?php echo $total_efectivo;?></td>
+				<td colspan="2"></td>
+			
+			  </tr>
+			  <tr>
+				<td colspan="3" ><strong>TOTAL NOTAS DE CRÉDITO</strong></td>
+				<td><strong><span class="text-danger">(-)</span> </strong><?php echo $total_nota;?></td>
+				<td colspan="2"></td>
+			  </tr>
+				<tr>
+				<td colspan="3" ><strong>TOTAL DEBITO</strong></td>
+				<td><strong><span class="text-success">(+)</span> </strong><?php echo $total_debito_real;?></td>	
+				<td><strong><span class="text-danger">(-)</span> </strong><?php echo $total_debito_desc;?></td>	
+				<td><strong><span class="text-success"></span> </strong><?php echo $total_debito;?></td>	
+				</tr>
+				<tr>
+				<td colspan="3" ><strong>TOTAL CREDITO</strong></td>
+				<td><strong><span class="text-success">(+)</span> </strong><?php echo $total_credito_real;?></td>		
+				<td><strong><span class="text-danger">(-)</span></strong> <?php echo $total_credito_desc;?></td>
+				<td><strong><span class="text-success"></span></strong> <?php echo $total_credito;?></td>				
+				</tr>				
+				<tr class="line-top">
+				<td colspan="3" ><strong>TOTAL CAJA</strong></td>
+				<td><?php echo ($total_efectivo_caja);?></td>	
+				<td colspan="2"></td>
+				</tr>
+				<tr >
+				<td colspan="3" ><strong>TOTAL GLOBAL</strong></td>
+				<td><?php echo ($total_global);?></td>
+				<td colspan="2"></td>				
+				</tr>				
+			  </tr>			  
+			</tbody>
+		</table> 	
+	</div>
+	</div>
+</div>
+<div class="modal fade bs-example-modal-lg modal-prod" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="gridSystemModalLabel">Productos Asociados</h4>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Categoria</th>
+							<th>Nombre</td>
+							<th>Descripción</td>
+							<th>Cantidad</td>
+							<th>Descuento</td>
+							<th>Valor</td>
+						</tr>
+					</thead>
+					<tbody id="listado-venta">
+					</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+		</div>
+    </div>
+  </div>
+</div>
+<style type="text/css">
+
+#caja-lock {
+	background-color: rgba(255, 255, 255, 0.95);
+	height: 100%;
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+	z-index: 999;
+	opacity:0.9;
+	display:block;
+}
+.cssload-btn {
+	position: relative;
+	left: 35%;
+	left: calc(50% - 42px);
+		left: -o-calc(50% - 42px);
+		left: -ms-calc(50% - 42px);
+		left: -webkit-calc(50% - 42px);
+		left: -moz-calc(50% - 42px);
+	left: calc(50% - 42px);
+	top:40%;
+
+}
+
+
+@media print {
+  #wrapper {
+	display:none;
+  }
+  .impreso {
+    display:block !important;
+  }
+  * {
+	 font-family:"Helvetica Neue",Helvetica,Arial,sans-;
+  }
+  #head-1,#head-2,#content,#head-3 { 
+	width:100%;
+  }
+  #head-1,#head-3,#content,#head-2 {
+	margin-bottom:20px;
+  }
+
+  #head-1 > tbody > tr > td {
+	font-size:11px;
+	text-transform: uppercase;
+  }
+  #head-3 > tbody > tr > td {
+	font-size:11px;
+	text-transform: uppercase;
+  } 
+  #content > tbody > tr > td {
+	font-size:12px;
+	text-transform: uppercase;
+  }  
+  #head-2 > tbody > tr > td {
+	font-size:10px;
+  }    
+  .title-print{
+	text-transform: uppercase;
+	font-weight:bold;
+	font-size:14px !important;
+	margin-bottom:0px;
+	margin-top:0px;
+  }  
+  .font-11 {
+	font-size:11px;
+	text-transform: uppercase;
+  }
+  #final {
+	border-collapse:collapse;
+	width:302px;
+	border-width:0px;
+	border-style:solid;
+	border-color:#000;
+	
+	
+  }
+  #final > tbody > tr > td {
+	padding:15px;
+  }  
+}
+  .impreso {
+    display:none;
+  }
+  
+#head-1,#head-2,#content,#head-3, #head-4{
+	width:100%;
+  }
+  #head-1,#head-3,#content,#head-2 {
+	margin-bottom:20px;
+  }
+
+  #head-1 > tbody > tr > td {
+	font-size:11px;
+	text-transform: uppercase;
+  }
+  #head-3 > tbody > tr > td {
+	font-size:11px;
+	text-transform: uppercase;
+  } 
+  #head-4 > tbody > tr > td {
+	font-size:11px;
+	text-transform: uppercase;
+  }   
+  #content > tbody > tr > td {
+	font-size:12px;
+	text-transform: uppercase;
+  }  
+  #head-2 > tbody > tr > td {
+	font-size:10px;
+  }    
+  .title-print{
+	text-transform: uppercase;
+	font-weight:bold;
+	font-size:14px !important;
+	margin-bottom:0px;
+  }  
+  .font-11 {
+	font-size:11px;
+	text-transform: uppercase;
+  }
+  #final {
+	border-collapse:collapse;
+	width:302px;
+	border:0px solid #000;
+	
+	
+  }
+  #final > tbody > tr > td {
+	padding:15px;
+  }  
+
+</style>
+<div class="modal fade" id="valida_usuario" tabindex="-1" role="dialog" aria-labelledby="valida_usuario">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" id="pass-content">
+		<div class="modal-body">
+		<form method="post" action="" name="form-pass" id="form-pass" autocomplete="off">
+		  <input type="hidden" value="<?php echo $this->usuario; ?>" id="usuario" name="usuario" >
+		  <div class="form-group">
+			<input type="password" class="form-control" id="pass" name="pass" placeholder="" required value="" >
+		  </div>  
+		</form>
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-primary" id="validar">Validar</button>
+		</div>
+    </div>
+  </div>
+</div>
+

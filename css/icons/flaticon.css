@@ -1,0 +1,81 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("flaticon.eot");
+	src: url("flaticon.eot#iefix") format("embedded-opentype"),
+	url("flaticon.woff") format("woff"),
+	url("flaticon.ttf") format("truetype"),
+	url("flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+    font-size: 26px;
+	font-style: normal;
+}
+.flaticon-bottle33:before {
+	content: "\e000";
+}
+.flaticon-bowl12:before {
+	content: "\e001";
+}
+.flaticon-chef23:before {
+	content: "\e002";
+}
+.flaticon-chicken8:before {
+	content: "\e003";
+}
+.flaticon-chicken9:before {
+	content: "\e004";
+}
+.flaticon-cup41:before {
+	content: "\e005";
+}
+.flaticon-cupcake8:before {
+	content: "\e006";
+}
+.flaticon-drink43:before {
+	content: "\e007";
+}
+.flaticon-food31:before {
+	content: "\e008";
+}
+.flaticon-hand134:before {
+	content: "\e009";
+}
+.flaticon-restaurant31:before {
+	content: "\e00a";
+}
+.flaticon-restaurant32:before {
+	content: "\e00b";
+}
+.flaticon-restaurant33:before {
+	content: "\e00c";
+}
+.flaticon-restaurant33-small:before {
+	content: "\e00c";
+	font-size: 20px !important;
+	
+}
+.flaticon-restaurant34:before {
+	content: "\e00d";
+}
+.flaticon-restaurant35:before {
+	content: "\e00e";
+}
+.flaticon-restaurant36:before {
+	content: "\e00f";
+}
+.flaticon-salt6:before {
+	content: "\e010";
+}
+.flaticon-tea17:before {
+	content: "\e011";
+}
+.flaticon-two276:before {
+	content: "\e012";
+}
+.flaticon-two281:before {
+	content: "\e013";
+}

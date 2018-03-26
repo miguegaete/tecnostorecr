@@ -1,0 +1,19 @@
+<script type="text/javascript" src="/js/jquery/1.11.3/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	$('#MainPopupIframe').attr('src', '/ventas/imprimir/<?php echo $this->id;?>/');
+
+
+    $('#MainPopupIframe').load(function(){
+        $(this).show();
+        setTimeout(function(){window.close();},3000);
+    });
+
+    
+        
+    
+});
+</script>
+
+<iframe id="MainPopupIframe"  width="400" height="400" frameborder="0"></iframe>

@@ -1,0 +1,5 @@
+$(function(){
+	
+	$(".chosen-select").chosen();
+	
+})

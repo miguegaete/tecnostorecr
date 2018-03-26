@@ -1,0 +1,141 @@
+<?php 
+	
+	if(isset($this->session_usu->nombre)){ ?>
+			<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+				  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				  </button>
+				</div>
+				
+				<a class="navbar-brand" href="#"><?php echo ($this->empresa[0]->nombre!="")?$this->empresa[0]->nombre:""; ?></a>
+
+
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				  <ul class="nav navbar-nav" id="nav-p">
+				  
+					<li id="mod_reportes" class="dropdown">
+					  <a href="#" id="load_charts" title="Gráficos de los movimientos de tu cuenta actual." ><span class="glyphicon glyphicon-stats" style="    border: 1px solid #ccc;
+    border-radius: 13px;
+    padding: 5px;"></span></a>
+					</li>
+					
+					<?php if($this->acceso['vender'] || $this->acceso['clientes'] || $this->acceso['consultar_ventas'] || $this->acceso['caja'] ){?>
+					<li class="dropdown" id="mod_ventas">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-usd"></span> Ventas <span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+						<!--li id="mod_vender" ><a href="/ventas/ventas-nuevo/">Vender Nuevo</a></li-->
+						<?php if($this->acceso['vender']){?>
+							<li id="mod_vender" ><a href="/ventas/ventas-nuevo/">Vender</a></li>
+						<?php } ?>
+						<?php if($this->acceso['clientes']){?>
+							<li id="mod_clientes" ><a href="/clientes/">Clientes</a></li>
+						<?php } ?>		
+						<?php if($this->acceso['consultar_ventas']){?>
+						<li id="mod_consultar_ventas"><a href="/venta/listado/">Consultar Ventas</a></li>
+						<?php } ?>	
+						<?php if($this->acceso['caja']){?>
+						<li id="mod_caja"><a href="/venta/caja/">Apertura/Cierre Caja</a></li>
+						<?php } ?>						
+					  </ul>
+					</li>
+					<?php } ?>
+					
+					
+					<?php if($this->acceso['productos'] || $this->acceso['categorias'] || $this->acceso['descuentos']){?>
+					<li id="mod_tienda" class="dropdown">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-home"></span> Tienda <span class="caret"></span></a>
+					  <ul class="dropdown-menu nav-p-child">
+						<?php if($this->acceso['productos']){?>
+						<li id="mod_productos" ><a href="/productos/">Productos</a></li>
+						<?php } ?>
+						<?php if($this->acceso['categorias']){?>
+					 	<li id="mod_categorias"><a href="/productos/categoria/">Categorias</a></li>
+						<?php } ?>
+						<?php if($this->acceso['descuentos']){?>
+					 	<li id="mod_descuentos"><a href="/productos/descuento/">Descuentos</a></li>
+						<?php } ?>
+					  </ul>
+					</li>
+					<?php } ?>
+					
+					<?php if($this->acceso['usuarios']){?>
+						<li id="mod_usuarios" ><a href="/usuarios/"><span class="glyphicon glyphicon-user"></span> Usuarios</a></li>
+					<?php } ?>			
+
+					<?php if($this->acceso['reportes']){?>
+					<li id="mod_reportes" class="dropdown">
+					  <a href="/reportes/"><span class="glyphicon glyphicon-stats"></span> Reportes</a>
+					</li>					
+					<?php } ?>
+					<?php if($this->acceso['movimientos'] || $this->acceso['comprar'] || $this->acceso['proveedores'] || $this->acceso['consultar_compras'] || $this->acceso['saldos_movimientos'] ){?>
+					<li class="dropdown" id="mod_inventario">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-sort"></span> Inventario <span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+						<?php if($this->acceso['comprar']){?>
+							<li id="mod_comprar"><a href="/movimientos/comprar/">Comprar</a></li>
+						<?php } ?>						  
+						<?php if($this->acceso['consultar_compras']){?>
+							<li id="mod_consultar_compras"><a href="/movimientos/consultar-compras/">Consultar Compras</a></li>
+						<?php } ?>							
+						<?php if($this->acceso['movimientos']){?>
+							<li id="mod_movimientos"><a href="/movimientos/">Movimientos</a></li>
+						<?php } ?>	
+
+						<?php if($this->acceso['proveedores']){?>
+							<li id="mod_proveedores"><a href="/movimientos/proveedores/">Proveedores</a></li>
+						<?php } ?>	
+						<?php if($this->acceso['saldos_movimientos']){?>
+							<li id="mod_saldos_movimientos"><a href="/movimientos/saldos-y-movimientos/">Resumen Saldos y Movimientos</a></li>
+						<?php } ?>							
+					  </ul>
+					</li>	
+					<?php } ?>
+					
+					<?php if($this->acceso['reparaciones'] ){?>
+					<li class="dropdown" id="mod_repa">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-phone"></span>  <span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+						<?php if($this->acceso['reparaciones']){?>
+							<li id="mod_reparaciones" ><a href="/reparaciones/">Reparaciones</a></li>
+						<?php } ?>
+						<?php if($this->acceso['marcas']){?>
+							<li id="mod_marcas" ><a href="/marcas/">Marcas</a></li>
+						<?php } ?>		
+						<?php if($this->acceso['modelos']){?>
+						<li id="mod_modelos"><a href="/modelos/">Modelos</a></li>
+						<?php } ?>	
+						<?php if($this->acceso['tipos_reparaciones']){?>
+						<li id="mod_tipos-reparaciones"><a href="/tipos-reparaciones/">Tipos de Reparaciones</a></li>
+						<?php }  ?> 						
+					  </ul>
+					</li>
+					<?php } ?>					
+					
+				  </ul>
+				  
+				  <ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo "Hola, ".$this->session_usu->nombre." ";?><?php echo ($this->session_usu->tipo!=1)?"(Vendedor)":"(Administrador)";?><span class="caret"></span></a>
+					  <ul class="dropdown-menu">
+
+							<?php if($this->acceso['configurar']){?>
+							<li id="mod_configurar"><a href="/configurar/">Configurar Sistema</a></li>
+							<?php } ?>
+							<?php if($this->acceso['actualizar_datos']){?>
+							<li id="mod_actualizar"><a href="/usuarios/actualizar-datos/">Actualizar Datos</a></li>
+							<?php } ?>
+						<li role="separator" class="divider"></li>
+						<li><a href="/salir/">Salir</a></li>
+					  </ul>
+					</li>
+				  </ul>
+				</div><!-- /.navbar-collapse -->
+			  </div><!-- /.container-fluid -->
+			</nav>
+<?php } ?>

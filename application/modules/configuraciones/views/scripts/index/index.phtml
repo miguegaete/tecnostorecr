@@ -1,0 +1,126 @@
+﻿<div class="container-fluid">
+
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="page-header">
+      <h2><?php echo $this->title;?></h2>
+    </div>
+  </div>
+</div>
+  
+  <form name="form1" id="form1" class="form1" enctype="multipart/form-data" action="" autocomplete="off" >
+  <div class="row">
+	  <div class="col-md-6">
+		<legend>Configurar Empresa</legend>  
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+					<label for="password_actual">Nombre Empresa</label>
+					<input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa" required >
+					</div>      
+					<div class="form-group">
+					<label for="password2">R.U.T.</label>
+					<input type="text" class="form-control" id="rut" name="rut">
+					</div>
+					<div class="form-group">
+					<label for="password3">Dirección</label>
+					<input type="text" class="form-control" id="direccion" name="direccion" required>
+					</div>      
+					<div class="form-group">
+					<label for="nombre_user">Tipo Empresa</label>
+					<input type="text" class="form-control" id="tipo" name="tipo" required>  
+					</div> 
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+					<label for="email">Fono</label>
+					<input type="phone" class="form-control" id="fono" name="fono" >  
+					</div> 
+					<div class="form-group">
+					<label for="email">E-mail</label>
+					<input type="email" class="form-control" id="email" name="email" required>  
+					</div> 	  
+					<div class="form-group">
+					<label for="email">Imagen o Logo</label>
+					<input type="file" class="form-control" id="imagen" name="archivo"  > 
+					<!--div class="messages"></div--->
+					</div> 	
+					<div class="form-group"><div class="showImage"></div></div>
+				</div>
+			</div>
+			
+		
+
+	  </div>
+  
+	  <div class="col-md-6">
+		<legend>Configurar Transbank</legend>  
+		
+		<div class="row">
+			<div class="col-md-3">
+				<div class="form-group">
+				<label for="tbk_debito">% TBK Débito</label>
+				<input type="text" class="form-control" id="tbk_debito" name="tbk_debito" required >
+				</div>    
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+				<label for="tbk_credito">% TBK Crédito</label>
+				<input type="text" class="form-control" id="tbk_credito" name="tbk_credito">
+				</div>    
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+				<label for="txtIVA">% IVA</label>
+				<input type="text" class="form-control" id="txtIVA" name="txtIVA" required >
+				</div>        
+			</div>			
+		</div>
+	  
+	  </div>
+  </div>
+  <div class="row"> 
+	  <div class="col-md-6">
+	  <legend>Configurar Productos</legend>  	
+	
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				<label for="sin_sku_inicio">SKU Inicio (Productos Sin Código de Barra)</label>
+				<input type="text" class="form-control" id="sin_sku_inicio" name="sin_sku_inicio" >
+				</div>        
+			</div>
+		</div>	
+	
+	  </div>
+	  
+	<div class="col-md-6">
+		<legend>Configurar Sistema</legend>  
+		
+		<div class="row">
+			<div class="col-md-6">
+				<div class="checkbox">  
+							<label for="imprimir_boleta"> <input type="checkbox"  name="imprimir_boleta" id="imprimir_boleta" value="1" <?php echo ($this->datos_editar->imprimir_boleta!=0 AND $this->datos_editar->imprimir_boleta!="")?"checked":""; ?> ><span class="glyphicon glyphicon-file" aria-hidden="true" ></span> Imprimir Boleta</label>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+				<label for="sin_sku_inicio"><span class="glyphicon glyphicon-th-list" aria-hidden="true" ></span> Respaldar Base de Datos</label>
+				<a href="/configurar/respaldobd/">Descargar</a>
+				</div>        
+			</div>
+		</div>
+	</div>	  
+  </div>
+  <hr>
+	<button type="submit" class="btn btn-primary">Guardar</button>
+  <br>
+  <br>
+ </form>
+  
+
+
+</div>
+<div id="mensaje-ajax">
+</div>

@@ -1,0 +1,54 @@
+<div class="container">
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="page-header">
+		<div class="row">
+			<div class="col-md-6">
+				<h3 style="margin-bottom:0px;"><?php echo $this->title;?></h3>
+			</div>
+			<div class="col-md-6 text-right">
+			<?php if($this->tipo == 1){ ?>
+				<a href="/<?php echo $this->ruta; ?>/nuevo/" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#2eacce;"></span> <br>Añadir <?php echo $this->title;?></a>
+			<?php } ?>
+			</div>
+			
+		</div>
+	</div>
+  </div>
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      
+    <div class="panel-body">
+      <!-- Table -->
+      <table class="table table-hover table-bordered" id="table-<?php echo $this->ruta; ?>">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Modelo</th>
+          <th>Tipo Reparación</th>
+          <?php if($this->tipo == 1){ ?>
+			<th>Costo</th>
+		  <?php } ?> 
+          <th>Valor</th>		  
+          <th>Estado</th>
+		  <?php if($this->tipo == 1){ ?>
+          <th>Vender</th>
+          <th>Acción</th>
+		  <?php } ?> 
+        </tr>
+        </thead>
+
+        <tbody id="listado">
+        </tbody>  
+
+      </table>  
+	</div>
+  </div>
+</div>
+</div>
+</div>
+
+
+

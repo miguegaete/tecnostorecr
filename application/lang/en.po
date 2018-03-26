@@ -1,0 +1,467 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: pymebase\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-01 15:24-0400\n"
+"PO-Revision-Date: 2012-03-01 15:25-0400\n"
+"Last-Translator: Cristhián Monasterio <mt2h@hotmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: translate\n"
+"X-Poedit-Basepath: D:\\Documentos\\Proyectos\\Pyme2\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: application\n"
+
+#: application/helpers/Facebook.php:19
+msgid "Error al intentar crear el helper para Facebook"
+msgstr "Attempting to create the helper to Facebook"
+
+#: application/helpers/GaleriaImagenes.php:20
+msgid "Fotografías"
+msgstr "Photographs"
+
+#: application/helpers/Google.php:21
+msgid "Error al intentar crear el helper para Google"
+msgstr "Attempting to create the helper to Google"
+
+#: application/helpers/Navegacion.php:7
+msgid "Usted está en:"
+msgstr "You are in:"
+
+#: application/helpers/Navegacion.php:7
+msgid "Inicio"
+msgstr "Home"
+
+#: application/helpers/Twitter.php:20
+msgid "Error al intentar crear el helper para Twitter"
+msgstr "Attempting to create the helper to Twitter"
+
+#: application/modules/actividades/controllers/IndexController.php:30
+#: application/modules/actividades/controllers/IndexController.php:36
+#: application/modules/actividades/controllers/IndexController.php:72
+#: application/modules/actividades/controllers/IndexController.php:87
+#: application/modules/actividades/controllers/IndexController.php:93
+msgid "Actividades"
+msgstr "Activities"
+
+#: application/modules/actividades/controllers/IndexController.php:72
+#: application/modules/actividades/models/Actividad.php:109
+#: application/modules/actividades/models/Actividad.php:139
+msgid "actividades"
+msgstr "activities"
+
+#: application/modules/actividades/models/Actividad.php:79
+msgid "Actividad no existe o ha caducado"
+msgstr "Activity does not exist or has expired"
+
+#: application/modules/default/controllers/ContactoController.php:62
+msgid "Su mensaje ha sido enviado, pronto nos contactaremos con usted."
+msgstr "Your message has been sent, we will contact you soon."
+
+#: application/modules/default/controllers/ContactoController.php:71
+#: application/modules/default/controllers/ContactoController.php:122
+msgid "Ha ocurrido un error inesperado, por favor intentelo más tarde."
+msgstr "An unexpected error has occurred, please try again later."
+
+#: application/modules/default/controllers/ContactoController.php:80
+#: application/modules/default/controllers/ContactoController.php:83
+msgid "Contáctenos"
+msgstr "Contact Us"
+
+#: application/modules/default/controllers/ContactoController.php:114
+msgid "Por favor revise los siguientes datos: "
+msgstr "Please review the following information:"
+
+#: application/modules/default/controllers/ContactoController.php:129
+msgid "No puede ingresar al formulario por este medio "
+msgstr "You can not access the form hereby"
+
+#: application/modules/documentos/controllers/IndexController.php:30
+#: application/modules/documentos/controllers/IndexController.php:33
+msgid "Documentos"
+msgstr "Documents"
+
+#: application/modules/editables/controllers/IndexController.php:20
+#: application/modules/editables/models/Pagina.php:59
+msgid "quienes-somos"
+msgstr "about-us"
+
+#: application/modules/editables/controllers/IndexController.php:25
+msgid "mision"
+msgstr "mission"
+
+#: application/modules/editables/controllers/IndexController.php:30
+msgid "vision"
+msgstr "vision"
+
+#: application/modules/editables/models/Pagina.php:68
+msgid "Error al cargar la página, no existe o ha caducado"
+msgstr "Error loading the page, does not exist or has expired"
+
+#: application/modules/noticias/controllers/IndexController.php:38
+#: application/modules/noticias/controllers/IndexController.php:57
+msgid "Noticias"
+msgstr "News"
+
+#: application/modules/noticias/controllers/IndexController.php:57
+#: application/modules/noticias/models/Noticia.php:78
+#: application/modules/noticias/models/Noticia.php:113
+msgid "noticias"
+msgstr "news"
+
+#: application/modules/noticias/models/Noticia.php:84
+msgid "Noticia no existe o ha caducado"
+msgstr "News does not exist or has expired"
+
+#: application/modules/productos/controllers/IndexController.php:31
+#: application/modules/productos/controllers/IndexController.php:37
+#: application/modules/productos/controllers/IndexController.php:63
+msgid "Productos"
+msgstr "Products"
+
+#: application/modules/productos/controllers/IndexController.php:63
+msgid "productos"
+msgstr "products"
+
+#: application/modules/productos/models/Producto.php:96
+msgid "Producto no existe o ha caducado"
+msgstr "Product does not exist or has expired"
+
+#: application/modules/servicios/controllers/IndexController.php:30
+#: application/modules/servicios/controllers/IndexController.php:32
+#: application/modules/servicios/controllers/IndexController.php:36
+#: application/modules/servicios/controllers/IndexController.php:50
+msgid "Servicios"
+msgstr "services"
+
+#: application/modules/servicios/controllers/IndexController.php:50
+#: application/modules/servicios/models/Servicio.php:66
+#: application/modules/servicios/models/Servicio.php:119
+msgid "servicios"
+msgstr "services"
+
+#: application/modules/servicios/models/Servicio.php:76
+msgid "Servicio no existe o ha caducado"
+msgstr "Service does not exist or has expired"
+
+#: application/layouts/scripts/layout.phtml:23
+#: application/layouts/scripts/layout.phtml:24
+msgid "Diseño Web - Posicionamiento Web"
+msgstr "Web Design - SEO"
+
+#: application/modules/actividades/views/scripts/index/index.phtml:21
+msgid "No hay actividades programadas para los próximos días."
+msgstr "No activities scheduled for the coming days."
+
+#: application/modules/default/views/scripts/contacto/index.phtml:5
+msgid "Escríbanos y cuéntenos en qué podemos asesorarlo"
+msgstr "Write us and tell us how we can help"
+
+#: application/modules/default/views/scripts/contacto/index.phtml:8
+#: application/modules/default/views/scripts/contacto/index.phtml:9
+msgid "Nombres"
+msgstr "Names"
+
+#: application/modules/default/views/scripts/contacto/index.phtml:11
+#: application/modules/default/views/scripts/contacto/index.phtml:12
+msgid "Apellidos"
+msgstr "Surname"
+
+#: application/modules/default/views/scripts/contacto/index.phtml:17
+#: application/modules/default/views/scripts/contacto/index.phtml:18
+#: application/modules/default/views/scripts/contacto/index.phtml:38
+msgid "Teléfono"
+msgstr "Phone"
+
+#: application/modules/default/views/scripts/contacto/index.phtml:21
+msgid "Mensaje"
+msgstr "Message"
+
+#: application/modules/default/views/scripts/contacto/index.phtml:23
+msgid "Datos requeridos"
+msgstr "Data requirements"
+
+#: application/modules/default/views/scripts/contacto/index.phtml:24
+msgid "Enviar"
+msgstr "Send"
+
+#: application/modules/default/views/scripts/contacto/index.phtml:35
+msgid "Ver ubicación"
+msgstr "View location"
+
+#: application/modules/default/views/scripts/contacto/index.phtml:39
+msgid "Email"
+msgstr "Email"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:1
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:3
+#: application/modules/default/views/scripts/layout/top1.phtml:3
+#: application/modules/default/views/scripts/layout/top2.phtml:25
+#: application/modules/default/views/scripts/layout/top3.phtml:3
+msgid "Accesibilidad"
+msgstr "Accessibility"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:1
+#: application/modules/default/views/scripts/layout/top1.phtml:3
+#: application/modules/default/views/scripts/layout/top2.phtml:25
+#: application/modules/default/views/scripts/layout/top3.phtml:3
+#: application/modules/default/views/scripts/layout/top4.phtml:4
+#: application/modules/default/views/scripts/layout/top5.phtml:12
+msgid "accesibilidad"
+msgstr "accessibility"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:4
+msgid "Las teclas de acceso son un dispositivo de navegación que le permite navegar por este sitio web utilizando su teclado."
+msgstr "Access keys are a navigation device that allows you to navigate this site using your keyboard."
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:5
+msgid "Utilización de las teclas de acceso en su navegador web"
+msgstr "Using access keys in your web browser"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:8
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:12
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:16
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:20
+msgid "Mantenga pulsada la tecla"
+msgstr "Press and hold"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:8
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:12
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:16
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:20
+msgid "y presione el número de la"
+msgstr "and press the number of"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:8
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:20
+msgid "tecla de acceso"
+msgstr "access keys"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:11
+msgid "y superiores"
+msgstr "and higher"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:12
+msgid "tecla de acce"
+msgstr "Access key"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:12
+msgid "so"
+msgstr "y"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:16
+msgid "tecla de a"
+msgstr "Access k"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:16
+msgid "cceso"
+msgstr "ey"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:22
+msgid "Teclas de acceso disponibles"
+msgstr "Available access keys"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:23
+msgid "Este sitio utiliza una configuración que se acerca en detalle a la mayoría de las recomendaciones internacionales sobre las teclas de acceso. Estas son:"
+msgstr "This site uses a setup that closely matches most international recommendations on access keys. These are:"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:27
+#: application/modules/default/views/scripts/layout/footer.phtml:12
+#: application/modules/default/views/scripts/layout/main.phtml:7
+msgid "Quiénes somos"
+msgstr "About Us"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:35
+msgid "Puede encontrar más información sobre las teclas de acceso en"
+msgstr "You can find more information about access keys"
+
+#: application/modules/default/views/scripts/index/accesibilidad.phtml:35
+msgid "Directrices de  Accesibilidad del W3C."
+msgstr "W3C Accessibility Guidelines."
+
+#: application/modules/default/views/scripts/index/index.phtml:13
+msgid "Quiénes"
+msgstr "About"
+
+#: application/modules/default/views/scripts/index/index.phtml:13
+msgid "somos"
+msgstr "us"
+
+#: application/modules/default/views/scripts/layout/footer.phtml:3
+msgid "Logo footer"
+msgstr "Footer logo"
+
+#: application/modules/default/views/scripts/layout/footer.phtml:7
+msgid "Elaborado por Aeurus"
+msgstr "Prepared by Aeurus"
+
+#: application/modules/default/views/scripts/layout/footer.phtml:8
+msgid "Dirección"
+msgstr "Address"
+
+#: application/modules/default/views/scripts/layout/footer.phtml:8
+msgid "teléfono"
+msgstr "phone"
+
+#: application/modules/default/views/scripts/layout/footer.phtml:12
+#: application/modules/default/views/scripts/layout/main.phtml:12
+msgid "contacto"
+msgstr "contact"
+
+#: application/modules/default/views/scripts/layout/main.phtml:4
+msgid "Pyme Base Framework 3.0, Versión 2012"
+msgstr "SME Base Framework 3.0, Version 2012"
+
+#: application/modules/default/views/scripts/layout/main.phtml:7
+msgid "Quiénes somos: Tecla de Acceso 2"
+msgstr "About us: Access Key 2"
+
+#: application/modules/default/views/scripts/layout/main.phtml:8
+msgid "Noticias: Tecla de Acceso 6"
+msgstr "News: Access Key 6"
+
+#: application/modules/default/views/scripts/layout/main.phtml:9
+msgid "Productos: Tecla de Acceso 4"
+msgstr "Products: Access Key 4"
+
+#: application/modules/default/views/scripts/layout/main.phtml:10
+msgid "documentos"
+msgstr "documents"
+
+#: application/modules/default/views/scripts/layout/main.phtml:10
+msgid "Documentos: Tecla de Acceso 5"
+msgstr "Documents: Access Key 5"
+
+#: application/modules/default/views/scripts/layout/main.phtml:11
+msgid "Servicios: Tecla de Acceso 3"
+msgstr "Services: Access Key 3"
+
+#: application/modules/default/views/scripts/layout/main.phtml:12
+msgid "Contáctenos: Tecla de Acceso 7"
+msgstr "Contact: Access key 7"
+
+#: application/modules/default/views/scripts/layout/top1.phtml:3
+#: application/modules/default/views/scripts/layout/top2.phtml:24
+#: application/modules/default/views/scripts/layout/top3.phtml:3
+#: application/modules/default/views/scripts/layout/top4.phtml:4
+#: application/modules/default/views/scripts/layout/top5.phtml:13
+msgid "mapa-del-sitio"
+msgstr "site-map"
+
+#: application/modules/default/views/scripts/layout/top1.phtml:3
+#: application/modules/default/views/scripts/layout/top2.phtml:24
+#: application/modules/default/views/scripts/layout/top3.phtml:3
+#: application/modules/default/views/scripts/layout/top5.phtml:13
+msgid "Mapa del sitio"
+msgstr "Sitemap"
+
+#: application/modules/default/views/scripts/layout/top2.phtml:3
+msgid "Tenemos la solución a su necesidad. Rápido, Confiable y Seguro."
+msgstr "We have the solution to your needs. Fast, Reliable and Secure."
+
+#: application/modules/default/views/scripts/layout/top2.phtml:6
+#: application/modules/default/views/scripts/layout/top2.phtml:19
+#: application/modules/default/views/scripts/layout/top5.phtml:4
+msgid "Español"
+msgstr "Spanish"
+
+#: application/modules/default/views/scripts/layout/top2.phtml:10
+#: application/modules/default/views/scripts/layout/top2.phtml:15
+msgid "English"
+msgstr "English"
+
+#: application/modules/default/views/scripts/layout/top4.phtml:3
+msgid "Eres un usuario nuevo?"
+msgstr "New User?"
+
+#: application/modules/default/views/scripts/layout/top4.phtml:3
+msgid "registro-de-usuario"
+msgstr "user-registration"
+
+#: application/modules/default/views/scripts/layout/top4.phtml:3
+msgid "Regístrate"
+msgstr "Sign up"
+
+#: application/modules/default/views/scripts/layout/top4.phtml:3
+msgid "iniciar-sesion"
+msgstr "login"
+
+#: application/modules/default/views/scripts/layout/top4.phtml:3
+msgid "Inicia sesión"
+msgstr "Login"
+
+#: application/modules/default/views/scripts/layout/top4.phtml:4
+msgid "Mapa del Sitio"
+msgstr "Sitemap"
+
+#: application/modules/default/views/scripts/layout/top4.phtml:4
+msgid "Teclas de usuario"
+msgstr "User keys"
+
+#: application/modules/default/views/scripts/layout/top4.phtml:4
+msgid "Aumentar textos"
+msgstr "Increase text"
+
+#: application/modules/default/views/scripts/layout/top5.phtml:12
+msgid "Teclas de acceso"
+msgstr "Access keys"
+
+#: application/modules/documentos/views/scripts/pagination.phtml:8
+#: application/modules/documentos/views/scripts/pagination.phtml:10
+msgid "Anterior"
+msgstr "Previous"
+
+#: application/modules/documentos/views/scripts/pagination.phtml:24
+#: application/modules/documentos/views/scripts/pagination.phtml:26
+msgid "Siguiente"
+msgstr "Next"
+
+#: application/modules/documentos/views/scripts/index/index.phtml:10
+msgid "Nombre"
+msgstr "Name"
+
+#: application/modules/noticias/views/scripts/index/index.phtml:21
+msgid "No se encontraron noticias."
+msgstr "There were no news."
+
+#: application/modules/portada/views/scripts/index/actividades.phtml:13
+#: application/modules/portada/views/scripts/index/noticias.phtml:14
+msgid "Ver más"
+msgstr "See more"
+
+#: application/modules/portada/views/scripts/index/noticias.phtml:3
+msgid "Novedades"
+msgstr "News"
+
+#: application/modules/servicios/views/scripts/index/detalle.phtml:12
+msgid "Contáctenos para este producto"
+msgstr "Contact us for this product"
+
+#: application/modules/servicios/views/scripts/index/index.phtml:22
+msgid "No se encontraron servicios."
+msgstr "Found no services."
+
+#~ msgid "Inglés"
+#~ msgstr "English"
+
+#~ msgid "Descripción"
+#~ msgstr "Description"
+
+#~ msgid "Tamaño"
+#~ msgstr "Size"
+
+#~ msgid "Reflexión no existe o ha caducado"
+#~ msgstr "Reflection does not exist or has expired"
+
+#~ msgid "Nuestra empresa"
+#~ msgstr "Our company"
+
+#~ msgid "Tecnología"
+#~ msgstr "Technology"
+
+#~ msgid "Galería fotográfica"
+#~ msgstr "Photo Gallery"

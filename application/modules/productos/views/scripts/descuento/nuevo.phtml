@@ -1,0 +1,74 @@
+﻿<div class="container"> 
+ <div class="row">
+ 
+  <div class="col-md-12">
+
+    <div class="page-header">
+		<div class="row">
+			<div class="col-md-6">
+				<h3 style="margin-bottom:0px;"><?php echo $this->title;?></h3>
+			</div>
+			<div class="col-md-6 text-right">
+				<a href="/productos/descuento/" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color:#2eacce;"></span> <br>Descuentos</a>
+			</div>			
+		</div>
+	</div>
+  </div>
+  
+  <div class="col-md-5">
+    <form name="form1" id="form1" method="post" action="" >
+      <div class="form-group">
+		<div class="row">
+			<div class="col-md-8">
+        <label for="barcode">Código</label>
+        <input type="text" required class="form-control" autocomplete="off" id="barcode" name="barcode" readonly>
+			</div>
+			<div class="col-md-2">
+				<label for="">&nbsp;</label>
+				<button type="button" class="form-control btn btn-success barcode-btn" ><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+			</div>
+			
+		</div>
+	  </div>
+	 <div class="form-group">
+        <label for="nombre">Descripción</label>
+        <input type="hidden" class="form-control" id="id" name="id" value="<?php echo ($this->datos_editar->id!="")?$this->datos_editar->id:""; ?>">
+        <input type="text" class="form-control" autocomplete="off" id="nombre" name="nombre" placeholder="Descripcion" required value="<?php echo ($this->datos_editar->descripcion!="")?$this->datos_editar->descripcion:""; ?>">
+      </div>
+	  
+	  <div class="form-group">
+		<div class="row">
+		  <div class="col-md-6">
+			<label for="fecha_inicio">Fecha Inicio</label>
+			<input type="text" class="form-control" autocomplete="off" id="fecha_inicio" name="fecha_inicio"  required value="<?php echo ($this->fecha_inicio!="")?$this->fecha_inicio:date("d-m-Y");?>">
+		  </div>
+		  
+		  <div class="col-md-6">
+			<label for="fecha_final">Fecha Final</label>
+			<input type="text" class="form-control" autocomplete="off" id="fecha_final" name="fecha_final"  required value="<?php echo ($this->fecha_final!="")?$this->fecha_final:date("d-m-Y");?>">
+		  </div>	
+		</div>
+	  </div>
+	  
+      <div class="form-group">
+		<div class="row">
+			<div class="col-md-3">
+				<label for="tipo">Tipo</label>
+				<select class="form-control" id="tipo" name="tipo"  required >
+					<option value="">Seleccione</option>
+					<option value="$">$</option>
+					<option value="%">%</option>
+				</select>
+			</div>
+			<div class="col-md-5">
+				<label for="valor">Valor</label>
+				<input type="text" class="form-control" autocomplete="off" id="valor" name="valor" placeholder="" required value="<?php echo ($this->datos_editar->valor!="")?$this->datos_editar->valor:""; ?>">
+			</div>
+		</div>	
+	  </div>		  
+      <button type="submit" class="btn btn-primary">Guardar</button>
+	  <button type="button" class="btn btn-default limpiar">Limpiar</button>
+    </form>
+  </div>
+  </div>
+ </div>

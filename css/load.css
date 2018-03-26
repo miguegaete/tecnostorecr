@@ -1,0 +1,85 @@
+#load {
+	background-color: rgba(255, 255, 255, 0.95);
+	height: 100%;
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+	z-index: 9501;
+	opacity:0.7;
+}
+.cssload-thecube {
+	width: 67px;
+	height: 67px;
+	margin:auto;
+	position: fixed;
+	transform: rotateZ(45deg);
+		-o-transform: rotateZ(45deg);
+		-ms-transform: rotateZ(45deg);
+		-webkit-transform: rotateZ(45deg);
+		-moz-transform: rotateZ(45deg);
+	
+}
+.cssload-aim{
+	position: relative;
+	width: 78px;
+	height: 78px;
+	left: 35%;
+	left: calc(50% - 42px);
+		left: -o-calc(50% - 42px);
+		left: -ms-calc(50% - 42px);
+		left: -webkit-calc(50% - 42px);
+		left: -moz-calc(50% - 42px);
+	left: calc(50% - 42px);
+	top:40%;
+	border-radius: 49px;
+	background-color: rgba(255,255,255,0.97);
+	border-width: 39px;
+	border-style: double;
+	border-color:transparent #262626;
+
+	box-sizing:border-box;
+		-o-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		-webkit-box-sizing:border-box;
+		-moz-box-sizing:border-box;
+	transform-origin:	50% 50%;
+		-o-transform-origin:	50% 50%;
+		-ms-transform-origin:	50% 50%;
+		-webkit-transform-origin:	50% 50%;
+		-moz-transform-origin:	50% 50%;
+	animation: cssload-aim 2.3s linear infinite;
+		-o-animation: cssload-aim 2.3s linear infinite;
+		-ms-animation: cssload-aim 2.3s linear infinite;
+		-webkit-animation: cssload-aim 2.3s linear infinite;
+		-moz-animation: cssload-aim 2.3s linear infinite;
+		
+		
+	
+}
+
+
+
+@keyframes cssload-aim{
+		0%{transform:rotate(0deg);}
+		100%{transform:rotate(360deg);}
+}
+
+@-o-keyframes cssload-aim{
+		0%{-o-transform:rotate(0deg);}
+		100%{-o-transform:rotate(360deg);}
+}
+
+@-ms-keyframes cssload-aim{
+		0%{-ms-transform:rotate(0deg);}
+		100%{-ms-transform:rotate(360deg);}
+}
+
+@-webkit-keyframes cssload-aim{
+		0%{-webkit-transform:rotate(0deg);}
+		100%{-webkit-transform:rotate(360deg);}
+}
+
+@-moz-keyframes cssload-aim{
+		0%{-moz-transform:rotate(0deg);}
+		100%{-moz-transform:rotate(360deg);}
+}

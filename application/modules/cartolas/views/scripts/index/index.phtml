@@ -1,0 +1,73 @@
+<div class="row-fluid" id="imprimir">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h2><?php echo $this->title;?> (Diaria)</h2>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="panel panel-default">
+		<!-- Default panel contents -->    
+			<div id="noPrint" class="panel-heading">
+				<div class="row">
+					<div class="col-lg-11">
+						<form name="filtro-fecha" method="post" action="">
+							<div class="row">
+								<div class="col-xs-3">
+									<input type="text" class="form-control input-small" id="fecha" name="fecha" value="<?php echo date("d-m-Y 0:00");?>">
+								</div>
+								<div class="col-xs-2">
+									<a href="#" class="btn btn-default" name="fechasfiltro" id="filtrar" value="1">Filtrar</a>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="col-lg-1">
+						<button class="btn btn-default" id="refresh" style="float:right;"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></button>
+					</div><!-- /.col-lg-6 -->        
+				</div><!-- /.row -->
+			</div>
+			<div class="col-md-12">
+				<table id="my-table" class="table table-hover">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Fecha</th>
+							<th>Tipo</th>
+							<th>Descripción</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--<tr>
+							<td>#24544</td>
+							<td>01-09-2015 22:15</td>
+							<td>Ingreso</td>
+							<td>
+								<ul style="padding-left:0px;">
+									<li>Charrasco Palta x 1 $2.990</li>
+									<li>Bebida Fanta x 1 $1.000</li>
+								</ul>
+							</td>
+							<td>$3.990</td>
+						</tr>
+						<tr>
+							<td>#4</td>
+							<td>01-09-2015 22:15</td>
+							<td>Egreso</td>
+							<td>2Kg Pan</td>
+							<td>$2.000</td>
+						</tr>            
+						<tr>
+							<td class="text-right" colspan="4"><h3>Total</h3></td>
+							<td><h3>$990</h3></td>
+						</tr>-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div id="btnExportar" class="col-md-12">
+		<a  href="" id="exportar" class="btn btn-primary" target="_blank">Exportar a PDF</a>
+	</div>
+</div>
+

@@ -1,0 +1,108 @@
+﻿<div class="container">
+  <div class="col-md-12">
+	<div class="page-header">
+			<div class="row">
+				<div class="col-md-4 col-sm-4 col-xs-6">
+				<h3 style="margin-bottom:0px;"><?php echo $this->title;?></h3>
+				</div>
+				<div class="col-md-6 col-md-offset-2 col-sm-6 col-sm-offset-2 col-xs-6 text-right">
+					<a href="/productos/" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color:#2eacce;"></span><br>Productos</a>
+				</div>							
+			</div>
+	</div> 
+  </div>
+  <div class="col-md-4">
+	<ul class="nav nav-pills nav-stacked">
+		<li role="Información" class="menu-prod active informacion"><a class="options-prod" href="#producto-informacion">Información</a></li>
+	</ul>
+  </div>
+ <div class="col-md-7 col-md-offset-1">
+ 
+	<div id="producto-informacion" class="box-content">
+    <form name="form1" method="post" action="" enctype="multipart/form-data" autocomplete="off">
+
+		  <div class="form-group text-left title-head">
+			<span>INFORMACIÓN</span>
+		  </div>     
+      <div class="form-group">
+		<div class="row">
+			<div class="col-md-9">
+				<label for="nombre">SKU (Code bar)</label>
+				<input type="text" class="form-control" id="sku" name="sku" placeholder="SKU" required value="<?php echo ($this->datos_editar->sku!="")?$this->datos_editar->sku:""; ?>">
+			</div>
+
+			<!--div class="col-md-3">
+				<label for="nombre" class="col-md-12">&nbsp;</label>
+				<button  type="button" class="btn btn-success" id="generar-code">Generar <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+			</div-->
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="checkbox">  
+					<div class="row">
+						<div class="col-md-12">
+							<label for="sin_sku"> <input type="checkbox"  name="sin_sku" id="sin_sku" value="1" <?php echo ($this->datos_editar->sin_sku!=0 AND $this->datos_editar->sin_sku!="")?"checked":""; ?> >Sin Código de Barra</label>
+						</div>	
+					</div>
+				</div>		
+			</div>				
+			<div class="col-md-6">
+				<div class="checkbox">  
+					<div class="row">
+						<div class="col-md-12">
+							<label for="manejostock"> <input type="checkbox"  name="manejostock" id="manejostock" value="1" <?php echo ($this->datos_editar->manejostock!=0 AND $this->datos_editar->manejostock!="")?"checked":""; ?> >Con Manejo STOCK</label>
+						</div>	
+					</div>
+				</div>		
+			</div>		
+		</div>
+	  </div>
+      <div class="form-group">
+		<div class="row">
+			<div class="col-md-6">
+			<label for="nombre">Categoría</label>
+			<select class="form-control chosen-select" name="categoria" id="categoria" required>
+			  <option value="">Seleccione una opción</option>
+			  <?php if (count($this->categoria)) { ?>
+				  <?php foreach ($this->categoria as $aux) { ?>  
+				  <?php if($this->datos_editar->id_categoria == $aux->id){ ?>
+				  <option selected value="<?php echo $aux->id;?>"><?php echo $aux->nombre;?></option>
+				  <?php }else{ ?>
+				  <option value="<?php echo $aux->id;?>"><?php echo $aux->nombre;?></option>
+				  <?php }} ?>
+			  <?php } ?>
+
+			</select>
+			</div>
+			<div class="col-md-6">
+				<label for="nombre">Nombre</label>
+				<input type="hidden" class="form-control" id="id" name="id" value="<?php echo ($this->datos_editar->id!="")?$this->datos_editar->id:""; ?>">
+				<input type="hidden" class="form-control" name="tipo-edit" value="producto-informacion">
+				<input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required value="<?php echo ($this->datos_editar->nombre!="")?$this->datos_editar->nombre:""; ?>">				
+			</div>
+		</div>
+      </div> 	  
+      <div class="form-group">
+        <label for="descripcion">Descripcion</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" ><?php echo ($this->datos_editar->descripcion!="")?$this->datos_editar->descripcion:""; ?></textarea>
+      </div>
+	  
+      <div class="form-group">
+		<div class="row">
+			<div class="col-md-6">
+				<label for="nombre">Estado</label>
+				<select class="form-control chosen-select" name="estado" id="estado" required>
+				  <option value="1" <?php if($this->datos_editar->estado!=""){ echo ($this->datos_editar->estado!=0)?"selected":""; } ?> >Activo</option>
+				  <option value="0" <?php if($this->datos_editar->estado!=""){ echo ($this->datos_editar->estado!=1)?"selected":""; } ?>>Inactivo</option>
+				</select>			
+			</div>
+		
+		</div>
+      </div>    
+	  <div class="form-group text-right controls">
+		<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Guardar</button>
+      </div>  
+    </form>
+	</div>
+  </div>
+  </div>

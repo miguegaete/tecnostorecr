@@ -1,0 +1,41 @@
+﻿<div class="container">
+	<div class="row">
+	  <div class="col-md-12">
+
+    <div class="page-header">
+		<div class="row">
+			<div class="col-md-6">
+				<h3 style="margin-bottom:0px;"><?php echo $this->title;?></h3>
+			</div>
+			<div class="col-md-6 text-right">
+				<a href="/proveedores/" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color:#2eacce;"></span> <br>Proveedores</a>
+			</div>
+			
+		</div>
+	</div>
+	  </div>
+	  <div class="col-md-4">
+		<form name="form1" id="form1" method="post" action="" autocomplete="off">
+
+		  <div class="form-group">
+			<label for="txtRUT">RUT</label>
+			<input type="hidden" class="form-control" id="tipo" name="tipo" value="0" >
+			<input type="text" class="form-control" id="txtRUT" name="txtRUT" placeholder="RUT" required >
+		  </div>
+		  <div class="form-group">
+			<label for="txtNombre">Nombre</label>
+			<input type="text" class="form-control" id="txtNombre" name="txtNombre" placeholder="Nombre Empresa" required >
+		  </div>
+		  <div class="form-group">
+			<label for="txtEmail">Email</label>
+			  <input type="email" class="form-control" id="txtEmail" placeholder="example@mail.com" name="txtEmail" >
+		  </div>    
+		  <button type="submit" class="btn btn-primary">Guardar</button>
+		</form>
+	  </div>
+
+	</div>
+</div>
+
+
+

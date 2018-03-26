@@ -1,0 +1,48 @@
+<div class="container">
+
+	<div class="row">
+	
+		<div class="col-md-8 col-md-offset-2">
+			<div class="page-header">
+				<h1>Agendar Reparación</h1>
+			</div>			
+			<div class="row">
+				<div class="col-md-6">
+				
+					<select class="form-control chosen-select" name="modelos" id="modelos">
+						
+						<option>Selecciona tu dispositivo</option>
+						<?php foreach($this->modelos as $aux){ ?>
+						<option value="<?php echo $aux->id; ?>"><?php echo $aux->nombre_2; ?></option>
+						
+						<?php } ?>
+					</select>
+				</div>
+				
+				<div class="col-md-6">
+				
+					<select class="form-control chosen-select" name="modelos" id="modelos">
+						
+						<option>Selecciona el Problema</option>
+						<?php foreach($this->tipos as $aux){ ?>
+						<option value="<?php echo $aux->id; ?>"><?php echo $aux->nombre; ?></option>
+						
+						<?php } ?>
+					</select>
+				</div>				
+			
+			</div>
+			<br>
+			<div class="row show-grid">
+				<div class="col-md-12">
+					<button class="btn btn-primary" type="submit">Buscar</button>
+				</div>
+				
+			</div>
+			<hr>
+		
+		</div>
+	
+	</div>
+
+</div>

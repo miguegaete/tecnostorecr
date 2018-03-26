@@ -1,0 +1,45 @@
+/* CSS Document */
+#content-slider{ width:445px; position:relative;}
+.editable .detalle-right img{ border:1px solid #E3E3E3; margin: 0; }
+#content{ position:relative;}
+#slider{
+	margin: 10px auto 0;width: 400px !important;
+}
+#slider ul{ overflow:hidden; }
+#slider ul, #slider li{
+	margin:0;
+	padding:0;
+	list-style-image: none;
+	list-style-type: none;
+}
+/*#slider ul{
+	width: 914px;
+}*/
+#slider li{
+	width: 400px;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+#slider li a{margin: 0px 3px 0px 5px; text-decoration:none; }
+#prevBtn, #nextBtn{ 
+	display:block;
+	position:absolute;
+	overflow:hidden;
+	width: 28px;
+	height: 124px;
+	top: -2px;
+	text-indent:-8000px;
+}
+#prevBtn{ left: 0px;}	
+#nextBtn{ right: 0px; }														
+#prevBtn a, #nextBtn a{
+	display: block;
+	width: 28px;
+	height: 124px;
+}
+#prevBtn{ background: url(/imagenes/sitio/prev.png) no-repeat left bottom; }
+#nextBtn{ background: url(/imagenes/sitio/nextA.png) no-repeat right bottom; }	
+
+#prevBtn a{background: url(/imagenes/sitio/prevA.png) no-repeat 0px 3px;}
+#nextBtn a{ background: url(/imagenes/sitio/next.png) no-repeat right 3px; }	

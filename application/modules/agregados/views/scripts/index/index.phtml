@@ -1,0 +1,92 @@
+<div class="row-fluid">
+  <div class="col-md-12">
+
+    <div class="page-header">
+      <h2><?php echo $this->title;?></h2>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <form name="form1" method="post" action="" enctype="multipart/form-data" autocomplete="off">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="hidden" class="form-control" id="id" name="id" value="<?php echo ($this->datos_editar->id!="")?$this->datos_editar->id:""; ?>">
+        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required value="<?php echo ($this->datos_editar->nombre!="")?$this->datos_editar->nombre:""; ?>">
+      </div>
+      <div class="form-group">
+        <label for="descripcion">Descripcion</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" ><?php echo ($this->datos_editar->descripcion!="")?$this->datos_editar->descripcion:""; ?></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="valor">Valor</label>
+        <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <input type="text" class="form-control" id="valor" placeholder="Monto" name="valor" required value="<?php echo ($this->datos_editar->valor!="")?$this->datos_editar->valor:""; ?>">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="imagen">Imagen</label>
+        <input type="file" id="imagen" name="adjunto">
+      </div>      
+
+
+
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+  </div>
+  <div class="col-md-7 col-md-offset-1">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="input-group">
+            <input type="text" class="form-control" id="search-table" placeholder="Buscar...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></button>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+      </div><!-- /.row -->
+    </div>
+    <div class="panel-body" style="height:350px; overflow-y:scroll;">
+      <!-- Table -->
+      <table class="table table-bordered table-hover"  id="my-table">
+        <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Valor</th>
+          <th><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></th>
+          <th>Acción</th>
+        </tr>
+        </thead>
+
+        <tbody>
+          <?php if (count($this->agregados)) { ?>
+              <?php foreach ($this->agregados as $aux) { ?>    
+                <tr>
+                  <td><?php echo $aux->nombre;?></td>
+                  <td><?php echo $aux->descripcion;?></td>
+                  <td><?php echo "$".formatearValor($aux->valor);?></td>
+                  <td><a href="<?php echo $aux->imagen;?>" class="image-link"><img src="<?php echo $aux->imagen;?>" style="width:70px;height:50px;"></a></td>
+                  <td>
+                    <a href="/agregados/eliminar/<?php echo $aux->id;?>/" title="Eliminar" class="eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                    <a href="/agregados/obtener/<?php echo $aux->id;?>/" title="Editar"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                  </td> 
+                </tr>
+              <?php } ?>
+          <?php }else{ ?>
+                <tr>
+                  <td colspan="4">No existen Agregados</td>
+                </tr>
+          <?php } ?>
+          
+        </tbody>  
+
+      </table>
+    </div>
+  </div>
+</div>

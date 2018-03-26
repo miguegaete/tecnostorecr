@@ -1,0 +1,83 @@
+<div class="container">
+	<div class="row">
+	  <div class="col-md-12">
+
+    <div class="page-header">
+		<div class="row">
+			<div class="col-md-6">
+				<h3 style="margin-bottom:0px;">Editando <?php echo $this->title;?></h3>
+			</div>
+			<div class="col-md-6 text-right">
+				<a href="/<?php echo $this->ruta;?>/" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color:#2eacce;"></span> <br><?php echo $this->title;?></a>
+				<a href="/<?php echo $this->ruta;?>/nuevo/" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#2eacce;"></span> <br>Añadir <?php echo $this->title;?></a>
+			</div>
+			
+		</div>
+	</div>
+	  </div>
+	  <div class="col-md-4">
+		<form name="form1" id="form1" method="post" action="" autocomplete="off">
+
+		  <div class="form-group">
+			<input type="hidden" class="form-control" id="tipo" name="tipo" value="1" >
+			<input type="hidden" class="form-control" id="id" name="id" required value="<?php echo ($this->reparacion->id!="")?$this->reparacion->id:''; ?>" >
+		  </div>
+		  
+		  <div class="form-group"> 
+			<label for="telefono">Modelo</label>
+			
+			<select id="id_modelo" name="id_modelo" class="form-control" required >
+				<option value="">Seleccionar Modelo</option>
+			  <?php if (count($this->modelos)) { ?>
+				  <?php foreach ($this->modelos as $aux) { ?>  
+				  <?php if($this->reparacion->id_modelo == $aux->id){ ?>
+				  <option selected value="<?php echo $aux->id;?>"><?php echo $aux->nombre;?></option>
+				  <?php }else{ ?>					  
+					<option value="<?php echo $aux->id;?>"><?php echo $aux->nombre;?></option>
+			  <?php }}} ?>
+			</select>
+			
+		  </div> 
+		  
+		  <div class="form-group"> 
+			<label for="telefono">Tipo Reparación</label>
+			
+			<select id="id_tipo" name="id_tipo" class="form-control" required >
+				<option value="">Seleccionar Tipo de Reparación</option>
+			  <?php if (count($this->tipos)) { ?>
+				  <?php foreach ($this->tipos as $aux) { ?>  
+				  <?php if($this->reparacion->id_tipo == $aux->id){ ?>
+				  <option selected value="<?php echo $aux->id;?>"><?php echo $aux->nombre;?></option>
+				  <?php }else{ ?>				  
+					<option value="<?php echo $aux->id;?>"><?php echo $aux->nombre;?></option>
+			  <?php }}} ?>
+			</select>
+			
+		  </div> 
+		  <div class="form-group">
+			<label for="costo">Costo</label>
+			<input type="text" class="form-control" id="costo" name="costo" placeholder="$" required value="<?php echo ($this->reparacion->costo!="")?$this->reparacion->costo:''; ?>" >
+		  </div>
+		  <div class="form-group">
+			<label for="valor">Valor</label>
+			<input type="text" class="form-control" id="valor" name="valor" placeholder="$" required value="<?php echo ($this->reparacion->valor!="")?$this->reparacion->valor:''; ?>" >
+		  </div>	
+		  
+
+		  <div class="form-group">
+			<label for="estado">Estado</label>
+			  <select name="estado" class="form-control" required >
+				<option value="">Seleccionar Estado</option>
+				<option <?php echo ($this->reparacion->estado == 1 )?"selected":"" ?> value="1">Activo</option>
+				<option <?php echo ($this->reparacion->estado == 0 )?"selected":"" ?> value="0">Inactivo</option>
+			  </select>
+		  </div>		  
+		  <button type="submit" class="btn btn-primary">Guardar</button> 
+		</form>
+	  </div>
+
+	</div>
+</div>
+
+
+

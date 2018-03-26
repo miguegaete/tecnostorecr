@@ -1,0 +1,14 @@
+<?php echo $this->nav; ?>
+
+<div class="listado-noticias">
+	<h2 class="margin-bottom-0"><?php echo $this->actividad->titulo; ?></h2>
+    <p class="text-info"> <?php echo $this->actividad->fecha->show();?> </p>
+	
+	<?php if(count($this->actividad->imagenes)) : ?>
+		<!-- [GALERIA MULTIMEDIA] -->
+		<?php echo $this->galeriaMultimedia($this->actividad->imagenes); ?>
+	<?php endif; ?>
+
+	<!-- [CUERPO] -->
+    <?php echo $this->actividad->descripcion; ?>
+</div>

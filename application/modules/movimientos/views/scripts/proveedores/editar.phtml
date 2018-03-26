@@ -1,0 +1,44 @@
+﻿<div class="container">
+	<div class="row">
+	  <div class="col-md-12">
+
+    <div class="page-header">
+		<div class="row">
+			<div class="col-md-6">
+				<h3 style="margin-bottom:0px;"><?php echo $this->title;?></h3>
+			</div>
+			<div class="col-md-6 text-right">
+				<a href="/proveedores/" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color:#2eacce;"></span> <br>Proveedores</a>
+				<a href="/proveedores/nuevo/" class="btn btn-default"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color:#2eacce;"></span> <br>Añadir Proveedor</a>
+			</div>
+			
+		</div>
+	</div>
+	  </div>
+	  <div class="col-md-4">
+		<form name="form1" id="form1" method="post" action="" autocomplete="off">
+
+		  <div class="form-group">
+			<label for="txtRUT">RUT</label>
+			<input type="hidden" class="form-control" id="txtTipo" name="txtTipo" value="1" >
+			<input type="hidden" class="form-control" id="txtId" name="txtId" value="<?php echo ($this->proveedor->id!="")?$this->proveedor->id:''; ?>" >
+			<input type="text" class="form-control" id="txtRUT" name="txtRUT" placeholder="RUT" required value="<?php echo ($this->proveedor->rut!="")?$this->proveedor->rut:''; ?>" >
+		  </div>
+		  <div class="form-group">
+			<label for="txtNombre">Nombre</label>
+			<input type="text" class="form-control" id="txtNombre" name="txtNombre" placeholder="Nombre Proveedor" required value="<?php echo ($this->proveedor->nombre!="")?$this->proveedor->nombre:''; ?>" >
+		  </div>
+
+		  <div class="form-group">
+			<label for="txtEmail">Email</label>
+			  <input type="email" class="form-control" id="txtEmail" placeholder="example@mail.com" name="txtEmail" value="<?php echo ($this->proveedor->email!="")?$this->proveedor->email:''; ?>" >
+		  </div>    
+		  <button type="submit" class="btn btn-primary">Guardar</button> 
+		</form>
+	  </div>
+
+	</div>
+</div>
+
+
+

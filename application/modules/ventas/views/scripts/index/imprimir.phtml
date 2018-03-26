@@ -1,0 +1,60 @@
+ <?php        
+		
+		//require(LIBRARY_PATH.'/MPDF/PDF_AutoPrint.php');
+		$fecha = new pichoDateController($this->pedido[0]->cantidad);
+		
+        $html =  "<style type='text/css'>
+                    .left-50 { float:left;width:50%;}
+                    .left { float:left;width:100%;}
+                    .txt-r{ text-align:right;}
+                     table td { margin:0;padding:0;}
+                     table { border:0px; border-collapse:collapse; width:100%; }
+                     .m-15{margin-top:15px; margin-bottom:25px; }
+                 </style>
+                 <div class='left'> </div>
+                 <div class='left-50'>Fecha:".$fecha->show("date")."</div><div class='left-50 txt-r'>Hora:".$fecha->show('time')."</div>
+                 <div class='left m-15'>
+                 <table>";
+				 
+           if (count($this->resultado)) { 
+               foreach ($this->resultado as $aux) {     
+				 $html .= "<tr>
+                            <td>".$aux->categoria.".".$aux->nombre."</td>
+                            <td>X</td>
+                            <td>".$aux->cantidad."</td>
+                        </tr>";
+				 }
+		   }
+			$html .= "<tr><td colspan='2'>&nbsp;</td></tr>"; 
+			$html .= "<tr><td colspan='2'>Descripcion</td></tr>"; 
+			$html .= "<tr><td colspan='2'>".$this->pedido[0]->descripcion."</td></tr>"; 
+            $html .="</table></div>";
+			
+			
+			$html .= "<pagebreak />";
+			$html .= "<div class='left-50'>Fecha:".$fecha->show("date")."</div><div class='left-50 txt-r'>Hora:".$fecha->show('time')."</div>";
+			$html .="<div class='left m-15'>";
+			 if (count($this->resultado)) { 
+               foreach ($this->resultado as $aux) {     
+				 $html .= "<tr>
+                            <td>".$aux->categoria.".".$aux->nombre."</td>
+                            <td>X</td>
+                            <td>".$aux->cantidad."</td>
+                        </tr>";
+				 }
+		   }
+			$html .= "<tr><td colspan='2'>&nbsp;</td></tr>"; 
+			$html .= "<tr><td colspan='2'>Descripcion</td></tr>"; 
+			$html .= "<tr><td colspan='2'>".$this->pedido[0]->descripcion."</td></tr>"; 
+            $html.="</table></div>";
+			
+			
+			
+			
+        $mpdf= new PDF_AutoPrint('utf-8',array(80,297),0,'',2,2,0,2);
+        $mpdf->WriteHTML($html);
+        $mpdf->AutoPrint(true);
+        $mpdf->Output();
+
+
+?>

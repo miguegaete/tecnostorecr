@@ -1,0 +1,97 @@
+<div class="container">
+	<div class="row">
+	  <div class="col-md-12">
+
+    <div class="page-header">
+		<div class="row">
+			<div class="col-md-6">
+				<h3 style="margin-bottom:0px;">Añadir <?php echo $this->title;?></h3>
+			</div>
+			<div class="col-md-6 text-right">
+				<a href="/<?php echo $this->ruta;?>/" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true" style="color:#2eacce;"></span> <br><?php echo $this->title;?></a>
+			</div>
+			
+		</div>
+	</div>
+	  </div>
+	  <div class="col-md-4">
+		<form name="form1" id="form1" method="post" action="" autocomplete="off">
+			
+		  <div class="form-group"> 
+			<label for="telefono">Modelo</label>
+			
+			<select id="id_modelo" name="id_modelo" class="form-control" required >
+				<option value="">Seleccionar Modelo</option>
+			  <?php if (count($this->modelos)) { ?>
+				  <?php foreach ($this->modelos as $aux) { ?>  
+					<option value="<?php echo $aux->id;?>"><?php echo $aux->nombre_2;?></option>
+				  <?php }} ?>
+			</select>
+			
+		  </div> 
+		  
+		  <div class="form-group"> 
+			<label for="telefono">Tipo Reparación</label>
+			
+			<select id="id_tipo" name="id_tipo" class="form-control" required >
+				<option value="">Seleccionar Tipo de Reparación</option>
+			  <?php if (count($this->tipos)) { ?>
+				  <?php foreach ($this->tipos as $aux) { ?>  
+					<option value="<?php echo $aux->id;?>"><?php echo $aux->nombre;?></option>
+				  <?php }} ?>
+			</select>
+			
+		  </div> 		  
+		  
+		  <div class="form-group">
+			<label for="costo">Costo</label>
+			<input type="hidden" class="form-control" id="tipo" name="tipo" value="0" >
+			<input type="hidden" class="form-control" id="id" name="id">
+			<input type="text" class="form-control" id="costo" name="costo" placeholder="$" required >
+		  </div>
+		  <div class="form-group">
+			<label for="valor">Valor</label>
+			<input type="text" class="form-control" id="valor" name="valor" placeholder="$" required >
+		  </div>		  		  
+		  <div class="form-group"> 
+			<label for="telefono">Estado</label>
+			
+			<select id="estado" name="estado" class="form-control" required >
+				<option value="">Seleccionar Estado</option>
+				<option value="1">Activo</option>
+				<option value="0">Inactivo</option>
+			</select>
+			
+		  </div>  
+		  <button type="submit" class="btn btn-primary">Guardar</button>
+		</form>
+	  </div>
+
+	  <div class="col-md-7 col-md-offset-1">
+			<br>
+			<h5>Ultimas <?php echo $this->title;?> Añadidas</h5>
+			<hr>
+			
+			<div class="list-group" id="ultimas-<?php echo $this->ruta;?>">
+				<?php foreach($this->reparaciones as $aux) { ?>
+			  <a href="#" class="list-group-item">
+				<h5 class="list-group-item-heading"><?php echo '[#'.$aux->id.'] '.$aux->modelo;?></h5>
+				<p class="list-group-item-text">
+				<?php echo $aux->fecha.' '.$aux->hora.' '.$aux->tipo; ?> 
+				</p>
+			  </a>
+			  <?php } ?>
+			</div>			
+			
+		
+			
+			
+			
+			
+			
+	  </div>
+	</div>
+</div>
+
+
+

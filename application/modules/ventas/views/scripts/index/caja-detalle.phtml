@@ -1,0 +1,16 @@
+ <?php        
+		
+			  
+		
+		$html = $this->listado;
+		
+		//echo $html;
+		$stylesheet = file_get_contents('css/bootstrap.css');
+        $mpdf= new PDF_AutoPrint('utf-8');
+        $mpdf->WriteHTML($stylesheet,1);
+        $mpdf->WriteHTML($html,2);
+        //$mpdf->AutoPrint(false);
+        $mpdf->Output();
+
+
+?>
