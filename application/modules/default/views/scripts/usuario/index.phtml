@@ -33,6 +33,7 @@
 					  <th>Nombre</th>
 					  <th>Tipo</th>
 					  <th>Email</th>
+                                          <th>Comisión %</th>
 					  <th>Estado</th>
 					  <th>Acción</th>
 					</tr>			
@@ -46,6 +47,7 @@
 						  <td><?php echo $aux->nombre;?></td>
 						  <td><?php echo ($aux->tipo==1)?"Administrador":"Vendedor";?></td>
 						  <td><?php echo $aux->email;?></td>
+                                                  <td><?php echo $aux->comision;?></td>
 						  <td id="estado_<?php echo $aux->id;?>" class="estado-content" ><?php echo ($aux->estado==1)?"<label class='label label-success estado' id='$aux->id'>Activo</label>":"<label class='label label-danger estado' id='$aux->id'>Inactivo</label>";?></td>
 						  <td>
 						  

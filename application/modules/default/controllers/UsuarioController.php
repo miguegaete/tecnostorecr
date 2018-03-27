@@ -119,7 +119,8 @@ class UsuarioController extends Zend_Controller_Action
                             'USU_NOMBRE' => $this->_getParam('nombre'),
                             'USU_TIPO' => $this->_getParam('tipo'),
                             'USU_EMAIL' => $this->_getParam('email'),
-							'USU_ESTADO' => $this->_getParam('estado')
+                            'USU_ESTADO' => $this->_getParam('estado'),
+                            'USU_COMISION' => $this->_getParam('comision')
                             );
             
                 

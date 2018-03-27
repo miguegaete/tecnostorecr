@@ -170,13 +170,31 @@
 						</div>
 					</div>
 					
-					<div id="productos" class="row" style="height:300px;overflow:auto;">
+					<div id="productos" class="row" style="height:140px;overflow:auto;">
 						<div class="col-md-12">
 						<button type="button" class="list-group-item">Por favor seleccione una categoría</button>
 						</div>
 					</div>
-					
-					<div id="categorias" class="row" style="height:205px;overflow:auto;">
+                                            <hr>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <h5>Estimado <strong><?php echo $this->usuario_ventas[0]->usuario; ?></strong>, tu comisión este mes es :</h5>
+                                                                 
+                                                <blockquote class="blockquote-reverse" style="margin-bottom:0px;"> 
+                                                    <p><?php  echo $this->usuario_ventas[0]->total_ventas_comision; ?></p>
+                                                    <footer>
+                                                        
+                                                        <cite title="Source Title">Total Ventas</cite>
+                                                        <?php echo $this->usuario_ventas[0]->total_ventas; ?>
+                                                    </footer>
+                                                </blockquote>
+                                                
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                            <hr>
+					<div id="categorias" class="row" style="height:165px;overflow:auto;">
 						<?php if (count($this->categoria)) { ?>
 							<?php foreach ($this->categoria as $aux) { ?>  
 								

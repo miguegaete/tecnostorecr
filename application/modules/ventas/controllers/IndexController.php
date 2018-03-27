@@ -14,6 +14,8 @@ class Ventas_IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        
+        
 		$this->view->current2 = 'mod_vender'; 
         $session_pro = new Zend_Session_Namespace('ventas');
         $session_usu = new Zend_Session_Namespace('login');
@@ -27,7 +29,9 @@ class Ventas_IndexController extends Zend_Controller_Action
 		
 		
         $categoria = new Productos_Model_Categoria();
-		$producto =  new Productos_Model_Producto();
+        $producto =  new Productos_Model_Producto();
+         
+        
 		
 		
         #Archivos CSS
@@ -50,6 +54,7 @@ class Ventas_IndexController extends Zend_Controller_Action
         $this->view->categoria = $categoria->listar();
         $this->view->producto = $producto->listar();
 
+
 		
         $this->view->title = "Ventas";
     }
@@ -70,7 +75,7 @@ class Ventas_IndexController extends Zend_Controller_Action
 		
         $categoria = new Productos_Model_Categoria();
 		$producto =  new Productos_Model_Producto();
-		
+	$usuario = new Ventas_Model_Venta();   	
 		
         #Archivos CSS
 		$this->view->headLink()->appendStylesheet('/css/icons/flaticon.css');
@@ -91,7 +96,12 @@ class Ventas_IndexController extends Zend_Controller_Action
 
         $this->view->categoria = $categoria->listar();
         $this->view->producto = $producto->listar();
-
+        $mes = date('m');
+        $anio = date('Y');
+        $usuario_id = $session_usu->id;
+        $total_usuario = $usuario->ventasporusuario_venta($mes, $anio,$usuario_id);
+        $this->view->usuario_ventas = $total_usuario;
+        
 		
         $this->view->title = "Ventas";
     }	

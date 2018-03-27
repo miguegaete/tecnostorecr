@@ -92,7 +92,9 @@ class Default_Model_Usuario extends Zend_Db_Table_Abstract
                                                         "nombre"=>"USU_NOMBRE",
                                                         "tipo"=>"USU_TIPO",
                                                         "email"=>"USU_EMAIL",
-														"estado" => "USU_ESTADO"))
+							"estado" => "USU_ESTADO",
+                                                        "comision"=>"USU_COMISION"
+                                                        ))
                     ->order(array("USU_NOMBRE ASC","USU_ID ASC"));    
         
         if($limit != false && is_numeric($limit))
@@ -110,6 +112,7 @@ class Default_Model_Usuario extends Zend_Db_Table_Abstract
             $usuario->nombre = $rs->nombre;
             $usuario->tipo = $rs->tipo;
             $usuario->email = $rs->email;
+            $usuario->comision = $rs->comision;
             $usuario->estado = $rs->estado;
             
             $lista[] = $usuario;
@@ -164,6 +167,7 @@ class Default_Model_Usuario extends Zend_Db_Table_Abstract
             $obj->nombre = $result->USU_NOMBRE;
             $obj->tipo = $result->USU_TIPO;
             $obj->email = $result->USU_EMAIL;
+            $obj->comision = $result->USU_COMISION;
             $obj->estado = $result->USU_ESTADO;
             
         }

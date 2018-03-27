@@ -433,61 +433,64 @@ class Ventas_Model_Venta  extends Zend_Db_Table_Abstract
 		
 	}
 	
-	public function ventasporusuario($mes,$anio){
-		
+	public function ventasporusuario_venta($mes,$anio,$usuario = false){
+
         $sql = $this->select()
                     ->setIntegrityCheck(false)
                     ->from(array("p"=>"PEDIDO"),array(
 														"cantidad" => "COUNT(PED_ID)",
 														"total_ventas" => "SUM(PED_TOTAL)"
 														))										
-					->joinLeft(array("u"=>"USUARIO"),"p.USU_ID = u.USU_ID",array("id_codigo"=>"USU_ID",
-																				"usuario"=>"USU_NOMBRE"))
+					->joinLeft(array("u"=>"USUARIO"),"p.USU_ID = u.USU_ID",array(   "id_codigo"=>"USU_ID",
+                                                                                                        "usuario"=>"USU_NOMBRE",
+                                                                                                        "comision"=> "USU_COMISION"
+                                                                                                    ))
 					->where("p.FOR_ID <> 0")
 					->where("MONTH(p.PED_FECHA) = $mes")
 					->where("YEAR(p.PED_FECHA) = $anio")
 					->group("u.USU_ID")
 					->order("COUNT(PED_ID) DESC");
-					
-		$resultado = $this->fetchAll($sql);
-		
-        $sql2 = $this->select()
-                    ->setIntegrityCheck(false)
-                    ->from(array("p"=>"PEDIDO"),array(
-														"cantidad" => "COUNT(PED_ID)",
-														"total_ventas" => "SUM(PED_TOTAL)"
-														))										
-					->joinLeft(array("u"=>"USUARIO"),"p.USU_ID = u.USU_ID",array("id_codigo"=>"USU_ID",
-																				"usuario"=>"USU_NOMBRE"))
-					->where("p.FOR_ID = 0")
-					->where("MONTH(p.PED_FECHA) = $mes")
-					->where("YEAR(p.PED_FECHA) = $anio")
-					->group("u.USU_ID")
-					->order("COUNT(PED_ID) DESC");
-					
-		$resultado2 = $this->fetchAll($sql2);	
+                if($usuario){
+                
+                       $sql->where("u.USU_ID = $usuario");
+                
+                }					
+		$resultado = $this->fetchAll($sql);	
+            
 
-
+        ($ventas_efectivo = $this->ventasPorTipo(1, $mes, $anio, $usuario)); 
+        ($ventas_debito = $this->ventasPorTipo(2, $mes, $anio, $usuario)); 
+        ($ventas_credito = $this->ventasPorTipo(3, $mes, $anio, $usuario)); 
+        ($ventas_nota = $this->ventasPorTipo(0, $mes, $anio, $usuario)); 
 		
         foreach($resultado as $rs)
         {
-            $usuario = new stdClass();
-            $usuario->cantidad = $rs->cantidad;
-            $usuario->id_codigo = $rs->id_codigo;
-            $usuario->usuario = $rs->usuario;
-			
-			foreach($resultado2 as $rs2)
-			{
-				if($rs->id_codigo == $rs2->id_codigo){
-					$total_nota = $rs2->total_ventas;
-				}
+            $obj = new stdClass();
+            
+            $obj->cantidad_efectivo = $ventas_efectivo->cantidad;
+            (int)$obj->total_efectivo = $ventas_efectivo->ped_total;
+ 
+            $obj->cantidad_debito = $ventas_debito->cantidad;
+            (int)$obj->total_debito = $ventas_debito->ped_total;
 
-			}
-			
-            $usuario->total_ventas = "$".formatearValor($rs->total_ventas-$total_nota);
-            $usuario->total_ventas_b = ($rs->total_ventas-$total_nota);
-			
-            $lista[] = $usuario;
+            $obj->cantidad_credito = $ventas_credito->cantidad;
+            (int)$obj->total_credito = $ventas_credito->ped_total;
+
+            $obj->cantidad_nota = $ventas_nota->cantidad;
+            (int)$obj->total_nota = $ventas_nota->ped_total;            
+            
+            
+            $obj->cantidad = ($obj->cantidad_efectivo + $obj->cantidad_debito + $obj->cantidad_credito - $obj->cantidad_nota);
+            $obj->total_ventas = "$".formatearValor($obj->total_efectivo + $obj->total_debito + $obj->total_credito - $obj->total_nota);
+            $obj->total_ventas_b = ($obj->total_efectivo + $obj->total_debito + $obj->total_credito - $obj->total_nota);
+            
+            $obj->usuario = $rs->usuario;
+            $obj->comision = $rs->comision;
+
+            $obj->total_ventas_comision = "$". formatearValor(($obj->comision * $obj->total_ventas_b) /100);
+            $obj->total_ventas_comision_b = ($obj->comision * $obj->total_ventas_b) /100;
+            
+            $lista[] = $obj;
         }
         return $lista;			
 		
@@ -642,5 +645,128 @@ class Ventas_Model_Venta  extends Zend_Db_Table_Abstract
         return $lista;			
 		
 	}	
+        
+        private function ventasPorTipo($tipo,$mes,$anio,$id_usuario)
+        {
+            $configuracion = new Configuraciones_Model_Configurar();
+            
+            $sql = $this->select()
+                    ->setIntegrityCheck(false)
+                    ->from
+                        (
+                            array("p"=>"PEDIDO"),array
+                                                    (
+                                                    "cantidad" => "COUNT(PED_ID)",
+                                                    "ped_total" => "SUM(PED_TOTAL)"
+                                                    )
+                        )										
+                    ->joinLeft
+                            (
+                                array("u"=>"USUARIO"),"p.USU_ID = u.USU_ID",array
+                                                                                (
+                                                                                "id_codigo"=>"USU_ID",
+                                                                                "usuario"=>"USU_NOMBRE",
+                                                                                "comision"=> "USU_COMISION"
+                                                                                )
+                            )
+                    ->where("p.FOR_ID = $tipo")
+                    ->where("MONTH(p.PED_FECHA) = $mes")
+                    ->where("YEAR(p.PED_FECHA) = $anio")
+                    ->where("u.USU_ID = $id_usuario")
+                    ->group("u.USU_ID")
+                    ->order("COUNT(PED_ID) DESC");
+        
+            $resultado = $this->fetchRow($sql);
+            $obj = new stdClass();
+            
+            $config = $configuracion->obtener(2);
+            $obj->cantidad = (!empty($resultado->cantidad))?$resultado->cantidad:0;
+
+            if($tipo == 2){
+                $tbk_debito = (($resultado->ped_total * $config[0]->tbk_debito) / 100);
+                $obj->ped_total = (!empty($resultado->ped_total))?($resultado->ped_total - $tbk_debito):0;
+            }else if($tipo == 3){
+                $tbk_credito = (($resultado->ped_total * $config[0]->tbk_credito) / 100);
+                $obj->ped_total = (!empty($resultado->ped_total))?($resultado->ped_total - $tbk_credito):0;
+            }else{
+                $obj->ped_total = (!empty($resultado->ped_total))?$resultado->ped_total:0;
+            }
+                   
+            unset($sql,$resultado);
+            return $obj;
+        
+        }
+        
+	public function ventasporusuario($mes,$anio,$usuario = false){
+
+        $sql = $this->select()
+                    ->setIntegrityCheck(false)
+                    ->from(array("p"=>"PEDIDO"),array(
+														"cantidad" => "COUNT(PED_ID)",
+														"total_ventas" => "SUM(PED_TOTAL)"
+														))										
+					->joinLeft(array("u"=>"USUARIO"),"p.USU_ID = u.USU_ID",array(   "id_codigo"=>"USU_ID",
+                                                                                                        "usuario"=>"USU_NOMBRE",
+                                                                                                        "comision"=> "USU_COMISION"
+                                                                                                    ))
+					->where("p.FOR_ID <> 0")
+					->where("MONTH(p.PED_FECHA) = $mes")
+					->where("YEAR(p.PED_FECHA) = $anio")
+					->group("u.USU_ID")
+					->order("COUNT(PED_ID) DESC");
+                if($usuario){
+                
+                       $sql->where("u.USU_ID = $usuario");
+                
+                }					
+		$resultado = $this->fetchAll($sql);
+
+        $sql2 = $this->select()
+                    ->setIntegrityCheck(false)
+                    ->from(array("p"=>"PEDIDO"),array(
+														"cantidad" => "COUNT(PED_ID)",
+														"total_ventas" => "SUM(PED_TOTAL)"
+														))										
+					->joinLeft(array("u"=>"USUARIO"),"p.USU_ID = u.USU_ID",array("id_codigo"=>"USU_ID",
+																				"usuario"=>"USU_NOMBRE"))
+					->where("p.FOR_ID = 0")
+					->where("MONTH(p.PED_FECHA) = $mes")
+					->where("YEAR(p.PED_FECHA) = $anio")
+					->group("u.USU_ID")
+					->order("COUNT(PED_ID) DESC");
+                if($usuario){
+                
+                       $sql2->where("u.USU_ID = $usuario");
+                
+                }    					
+		$resultado2 = $this->fetchAll($sql2);	
+            
+
+                
+		
+        foreach($resultado as $rs)
+        {
+            $usuario = new stdClass();
+            $usuario->cantidad = $rs->cantidad;
+            $usuario->id_codigo = $rs->id_codigo;
+            $usuario->usuario = $rs->usuario;
+            (int)$usuario->comision = $rs->comision;
+			foreach($resultado2 as $rs2)
+			{
+				if($rs->id_codigo == $rs2->id_codigo){
+					$total_nota = $rs2->total_ventas;
+				}
+
+			}
+			
+            $usuario->total_ventas = "$".formatearValor($rs->total_ventas-$total_nota);
+            $usuario->total_ventas_b = ($rs->total_ventas-$total_nota);
+            $usuario->total_ventas_comision = "$". formatearValor(($usuario->comision * $usuario->total_ventas_b) /100);
+            (int)$usuario->total_ventas_comision_b = ($usuario->comision * $usuario->total_ventas_b) /100;
+            $lista[] = $usuario;
+        }
+        return $lista;			
+		
+	}        
 
 }

@@ -61,9 +61,15 @@ class ReporteController extends Zend_Controller_Action
 			
 		$mes = $this->_getParam('mes');
 		$anio = $this->_getParam('anio');
+                if(!empty($this->_getParam('id_usuario'))){
+                    $usuario = $this->_getParam('id_usuario');
+                }else{
+                    $usuario = false;
+                
+                }
 		
 		$productos = new Ventas_Model_Venta();
-		$rs = $productos->ventasporusuario($mes,$anio); 
+		$rs = $productos->ventasporusuario($mes,$anio,$usuario); 
 		
 		$this->_helper->json($rs);
 		exit;
