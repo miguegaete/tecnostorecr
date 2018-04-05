@@ -45,7 +45,7 @@ $(function(){
 		
 	});
 	
-	$("#anio_user").change(function(){
+	/*$("#anio_user").change(function(){
 		
 		var anio = $(this).val();
 		var mes = $("#mes_user").val();
@@ -55,8 +55,14 @@ $(function(){
 		}else{
 			mensajeLoad('Debe seleccionar un año correcto','error');
 		}
-	});	
+	});	*/
+	$('#form-reporte').validate({
+            submitHandler: function (form) 
+            { 
 
+                ventasPorUsuarioValidar();
+            }		
+	});   
 	
 	$("#select-reporte").change(function(){
 		cerrarTodo();
@@ -84,7 +90,14 @@ $(function(){
 		
 	})
 });
+function ventasPorUsuarioValidar(){
+		
+    var anio = $('#anio_user').val();
+    var mes = $("#mes_user").val();
+    
+    ventasPorUsuario(mes,anio);	
 
+}
 function productosMasVendidos(){
 
         /*var datos = {
@@ -250,10 +263,10 @@ function ventasPorUsuario(mes,anio){
                         html+= "<td>"+value.usuario +"</td>";
                         html+= "<td align=center><strong>"+value.cantidad+"<strong></td>";
                         html+= "<td align=center><strong>"+value.total_ventas+"<strong></td>";
-                        html+= "<td align=center width='50px'><input type='text' class='comision form-control' id='comision_"+value.id_codigo+"' class='input-sm form-control'  >";
-                        html+= "<input type='hidden' id='total_ventas_b_"+value.id_codigo+"' class='form-control' value='"+value.total_ventas_b+"' >";
+                        html+= "<td align=center width='50px'><input type='text' class='comision form-control' id='comision_"+value.id_usuario+"' class='input-sm form-control'  >";
+                        html+= "<input type='hidden' id='total_ventas_b_"+value.id_usuario+"' class='form-control' value='"+value.total_ventas_b+"' >";
 						html+= "</td>";
-						html+= "<td align=center><label id='total_final_"+value.id_codigo+"'></label></td>";
+						html+= "<td align=center><label id='total_final_"+value.id_usuario+"'></label></td>";
 						html+="</tr>";
 						html+="</tbody>";
 						total_dinero+=parseInt(value.total_ventas_b);
@@ -287,7 +300,9 @@ function ventasPorUsuario(mes,anio){
 function cerrarTodo(){
 	
 	$("div[id^='content_'").hide();
+        $("button[id^='buscar_'").hide();
 	$("select").attr("disabled",true);
+        //$('#form-reporte')[0].reset();
 	
 	
 }
@@ -300,6 +315,7 @@ function mostrarControlesVentasMensuales(){
 function mostrarControlesVentasporUsuario(){
 	$("#content_anio_user").show();	
 	$("#content_mes_user").show();	
+        $("#buscar_usuario_venta_por_mes").show();
 	$("#mes_user").attr("disabled",false);	
 	
 }

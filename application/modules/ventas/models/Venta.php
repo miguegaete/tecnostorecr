@@ -248,7 +248,10 @@ class Ventas_Model_Venta  extends Zend_Db_Table_Abstract
                                                         "tipo"=>"PED_TIPO",
 														"id_forma"=>"FOR_ID",
 														"ticket_transbank"=>"PED_TICKET"))										
-					->joinLeft(array("u"=>"USUARIO"),"p.USU_ID = u.USU_ID",array("usuario"=>"USU_NOMBRE"))
+					->joinLeft(array("u"=>"USUARIO"),"p.USU_ID = u.USU_ID",array("usuario"=>"USU_NOMBRE",
+                                                                                                     "id_usuario" => "USU_ID",
+                                                                                                     "nombre_usuario" => "USU_NOMBRE"
+                                                                                                    ))
 					->joinLeft(array("f"=>"FORMA_PAGO"),"p.FOR_ID = f.FOR_ID",array("forma"=>"FOR_NOMBRE"));
                     if($where){
 						$sql->where($where);
@@ -306,6 +309,8 @@ class Ventas_Model_Venta  extends Zend_Db_Table_Abstract
             $pedido->tipo = ($rs->tipo==0)?"Venta":"Nota de Crédito";
             $pedido->id_tipo = $rs->tipo;
             $pedido->usuario = $rs->usuario;
+            $pedido->id_usuario = $rs->id_usuario;
+            $pedido->nombre_usuario = $rs->nombre_usuario;
             $pedido->forma = $rs->forma;
             $pedido->id_forma = $rs->id_forma;
             $pedido->ticket_transbank = $rs->ticket_transbank;
@@ -450,22 +455,35 @@ class Ventas_Model_Venta  extends Zend_Db_Table_Abstract
 					->where("YEAR(p.PED_FECHA) = $anio")
 					->group("u.USU_ID")
 					->order("COUNT(PED_ID) DESC");
+        
                 if($usuario){
                 
                        $sql->where("u.USU_ID = $usuario");
                 
                 }					
+                
 		$resultado = $this->fetchAll($sql);	
             
+                //dp($resultado);exit;    
+        if($usuario){
+            ($ventas_efectivo = $this->ventasPorTipo(1, $mes, $anio, $usuario)); 
+            ($ventas_debito = $this->ventasPorTipo(2, $mes, $anio, $usuario)); 
+            ($ventas_credito = $this->ventasPorTipo(3, $mes, $anio, $usuario)); 
+            ($ventas_nota = $this->ventasPorTipo(0, $mes, $anio, $usuario));             
+        }
 
-        ($ventas_efectivo = $this->ventasPorTipo(1, $mes, $anio, $usuario)); 
-        ($ventas_debito = $this->ventasPorTipo(2, $mes, $anio, $usuario)); 
-        ($ventas_credito = $this->ventasPorTipo(3, $mes, $anio, $usuario)); 
-        ($ventas_nota = $this->ventasPorTipo(0, $mes, $anio, $usuario)); 
 		
         foreach($resultado as $rs)
         {
             $obj = new stdClass();
+            
+                //dp($resultado);exit;    
+            if(!$usuario){
+                ($ventas_efectivo = $this->ventasPorTipo(1, $mes, $anio, $rs->id_codigo)); 
+                ($ventas_debito = $this->ventasPorTipo(2, $mes, $anio, $rs->id_codigo)); 
+                ($ventas_credito = $this->ventasPorTipo(3, $mes, $anio, $rs->id_codigo)); 
+                ($ventas_nota = $this->ventasPorTipo(0, $mes, $anio, $rs->id_codigo));             
+            }            
             
             $obj->cantidad_efectivo = $ventas_efectivo->cantidad;
             (int)$obj->total_efectivo = $ventas_efectivo->ped_total;
@@ -485,6 +503,7 @@ class Ventas_Model_Venta  extends Zend_Db_Table_Abstract
             $obj->total_ventas_b = ($obj->total_efectivo + $obj->total_debito + $obj->total_credito - $obj->total_nota);
             
             $obj->usuario = $rs->usuario;
+            $obj->id_usuario = $rs->id_codigo;
             $obj->comision = $rs->comision;
 
             $obj->total_ventas_comision = "$". formatearValor(($obj->comision * $obj->total_ventas_b) /100);

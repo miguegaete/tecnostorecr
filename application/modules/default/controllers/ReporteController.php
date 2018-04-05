@@ -69,7 +69,7 @@ class ReporteController extends Zend_Controller_Action
                 }
 		
 		$productos = new Ventas_Model_Venta();
-		$rs = $productos->ventasporusuario($mes,$anio,$usuario); 
+		$rs = $productos->ventasporusuario_venta($mes,$anio,$usuario); 
 		
 		$this->_helper->json($rs);
 		exit;

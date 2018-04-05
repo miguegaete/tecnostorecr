@@ -384,4 +384,65 @@ class UsuarioController extends Zend_Controller_Action
 		$this->_helper->json($json);
 		exit;
 	}
+        
+    public function listadoUsuarioAction(){
+    
+        try
+        {
+            $usuario = new Default_Model_Usuario();
+            $rs = $usuario->listar();
+            $error = false;
+            $msg = "";
+        
+        } catch (Zend_Exception $ex) {
+            $rs = false;
+            $error = true;
+            $msg = $ex->getMessage();
+            
+        }
+
+        $json = new stdclass();
+        $json->rs = $rs;		
+        $json->error = $error;		
+        $json->msg = $msg;		
+        $this->_helper->json($json);
+        exit;        
+    }
+    public function cambiarUsuarioVentaAction(){
+        
+        $id_usuario = $this->_getParam('id_usuario');
+        $id_venta = $this->_getParam('id_venta');
+        
+        $venta = new Ventas_Model_Venta();
+        $usuario = new Default_Model_Usuario();
+        
+        $datos = array(
+                    
+                    "USU_ID" => $id_usuario
+            
+        );
+        
+        $where = "PED_ID = $id_venta";
+        
+        $rs  = $venta->actualizar($datos, $where);
+        
+        $json = new stdclass();
+        if(is_numeric($rs)){
+            
+            $where2 = "USU_ID = $id_usuario";
+            $usu = $usuario->obtener($where2);
+            
+            $json->rs = $usu;		
+            $json->error = false;		
+            $json->msg = "";
+            
+        }else{
+            $json->rs = $rs;		
+            $json->error = true;		
+            $json->msg = "Error al cambiar el usuario. contacte al administrador del sistema.";            
+        }
+        $this->_helper->json($json);
+        
+        exit;
+    }
 }

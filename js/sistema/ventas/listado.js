@@ -166,8 +166,84 @@ function listadoVentasCaja(id_caja){
 	
 }
 
+function listadoUsuarios(usuario){
+    
+	var html = "";
+	$.ajax({
+            url: '/usuarios/listado-usuario/',
+            type: 'post',
+            beforeSend: function() {
+                loadshow();
+            },				
+            success: function (data) 
+            {
+                loadhide();
+                if(data.rs!=""){
+                        html +="<option value='' >Seleccion Usuario</option>";
+                        $.each(data.rs, function(key,value){
+                            
+                            if(usuario == value.id){
+                                html +="<option selected='selected' value='"+value.id+"'>"+value.nombre+"</option>";
+                            }else{
+                                html +="<option value='"+value.id+"'>"+value.nombre+"</option>";
+                            }
+                        });
+                }else{
+                    html +="<option value='' >"+data.msg+"</option>"; 
+                }
+                $("#select_usuario").html(html);
+            }
+        });	
+    
+}
+function cambiarUsuarioVenta(){
+    
+    var id_usuario = $("#select_usuario").val();
+    var id_venta = $('#id_venta_cambio_usuario').val();
+    var id_usuario_antiguo = $('#id_usuario_antiguo').val();
+    $.ajax({
+        url: '/usuarios/cambiar-usuario-venta/',
+        type: 'post',
+        beforeSend: function() {
+            loadshow();
+        },				
+        success: function (data) 
+        {
+            loadhide();
+            if(!data.error){
+                $("#"+id_venta+'_'+id_usuario_antiguo).html(data.rs['nombre']);
+                $("#"+id_venta+'_'+id_usuario_antiguo).prop('id',id_venta+'_'+data.rs['id']);
+                
+                $('#id_usuario_antiguo').val(data.rs['id']);
+                mensajeLoad('Se ha cambiado el usuario de la venta', 'ok');
+            }else{
+                mensajeLoad('No se ha podido cambiar el usuario de la venta', 'error');
+            }
+        },
+        data:{id_usuario: id_usuario, id_venta: id_venta}
+    });  
+    
+    
+    
+}
+
 $(function(){
 	
+        
+        $(".cambiar-usuario").click(function(e){
+            e.preventDefault();
+            var usuario_aux = $(this).prop('id');
+            var usuario = usuario_aux.split('_');
+            
+            $('#id_venta_cambio_usuario').val(usuario[0]);
+            $('#id_usuario_antiguo').val(usuario[1]);
+            listadoUsuarios(usuario[1]);
+            
+            $('.modal-cambiar-usuario').modal();
+            
+        });
+        
+        
 	$('#valida_usuario').on('shown.bs.modal', function () {
 	  $("#pass").val('');
 	  $("#pass").focus();
@@ -196,6 +272,12 @@ $(function(){
 			
         }		
 	});	
+	$('#form-cambiar-usuario').validate({
+            submitHandler: function (form) 
+            { 
+                cambiarUsuarioVenta();
+            }		
+	});        
 	
 	$('#form-addventa').validate({
 		rules : {
