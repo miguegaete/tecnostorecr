@@ -83,7 +83,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view->headScript()->appendFile('/js/jquery/extension-button/buttons.colVis.min.js'); 		
 		#$view->headScript()->appendFile('/js/jquery/extension-button/pdfmake.min.js'); 		
 		#$view->headScript()->appendFile('/js/jquery/extension-button/vfs_fonts.js'); 		
-
+                
+                #Jquery Toast
+                $view->headScript()->appendFile('/js/jquery/jquery-toast-plugin/dist/jquery.toast.min.js');
+                $view->headLink()->appendStylesheet('/js/jquery/jquery-toast-plugin/dist/jquery.toast.min.css');
+                
 		#JS Global
 		$view->headScript()->appendFile('/js/sistema/principal/index.js'); 			
 		

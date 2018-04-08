@@ -10,11 +10,15 @@ function loadhide(){
 }				  
 
 function mensajeLoad(mensaje,tipo){
-	var alerta = (tipo=='error')?'danger':'success';
-	var icono = (tipo=='error')?'remove':'ok';
-	
-	$("#mensaje-load").html('<div class="alert alert-'+alerta+' alert-dismissible" id="alert-esp" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="glyphicon glyphicon-'+icono+'" aria-hidden="true"></span><strong> '+mensaje+'</strong></div>');	
-	$("#mensaje-load").fadeIn(500).delay(5000).fadeOut(500);
+    var alerta = (tipo=='error')?'Error':'Éxito';
+    var icono = (tipo=='error')?'error':'success';
+        
+    $.toast({
+        heading: alerta,
+        text: mensaje,
+        icon: icono,
+        hideAfter: 5000
+    });
 }	
 function limpiar(form){
 	$('#'+form)[0].reset();

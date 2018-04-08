@@ -36,7 +36,7 @@ var tipop = 0;
 		
 		$("#add_descuento").click(function(){
 
-			if(!$("#productos-venta tbody tr").hasClass("noVenta")){
+			if(productosExisten()){
 				cargarDescuentos();
 				$('#modal_add_descuento').modal();
 				
@@ -113,37 +113,14 @@ var tipop = 0;
 
 			
 			if(tipop!=2){//Si es distinto de una Nota de credito
-			$.ajax({
-				url: '/ventas/formas-pago/',
-				type: 'POST',
-				dataType: 'json',
-				async:true,
-				beforeSend: function()
-				{
-							$("#formas_pagos").html('<option value="">Cargando formas de pago...</option>');
-				},				
-				success: function (data)
-				{
-					if(data)
-					{
-						$.each(data, function(key,value)
-						{
-							html +="<option value='"+value.id+"'>";
-							html += value.nombre;
-							html += "</option>";
-						});
-					}else
-					{
-						html +="<option value=''>No existen resultados</option>"; 
-					}
-					$("#formas_pagos").html(html);
-				}
-			});	
+			
+                            alert('entro')
+                            cargarFormasPago();
 			
 			}
 			
 			
-			if(!$("#pedido tbody tr").hasClass("noPedido")){
+			if(productosExisten()){
 				
 				$('#myModal').modal();
 				
@@ -177,19 +154,9 @@ var tipop = 0;
 			tipop = $(this).val();
 			
 			if(tipop!=0){
-
-				$("#venta_title").html("Finalizar Nota de Credito");
-				$("#total_pagar_title").html("TOTAL NOTA DE CREDITO");
-				$(".section_formas").hide();
-				$(".section_monto").hide();
-				$(".section_vuelto").hide();
-				
+                                cambiarNotaCredito();
 			}else{
-				$("#venta_title").html("Finalizar Venta");
-				$("#total_pagar_title").html("TOTAL A PAGAR");
-				$(".section_formas").show();
-				$(".section_monto").show();
-				$(".section_vuelto").show();
+                                cambiarVenta();
 			}
 			
 		});
@@ -203,6 +170,8 @@ var tipop = 0;
 			$("#subtotal_a_pagar").val(0);
 			$(".total").html("$0");
 			$("#total_a_pagar").val(0);
+                        $("#descuentos_aplicados_2").html('$0');
+                        $("#descuentos_aplicados").val(0);
 			$("#s").html('<div class="col-md-12"><button type="button" class="list-group-item">Por favor seleccione una categoría</button></div>');
 			
 			//Limpiar Descuentos
@@ -215,6 +184,9 @@ var tipop = 0;
 			$("#cliente-sel").html('No hay cliente seleccionado');
 			
 			$("#cantidad-productos").html("0");
+                        
+                        //Reestablecer popup venta finalizar
+                        cambiarVenta();
 			
 		});		
 		
@@ -625,8 +597,8 @@ var tipop = 0;
 				{
 						loadhide();	
 						if(!isNaN(data.resultado)){					
-							$("#mensaje-load").html('<div class="alert alert-success alert-dismissible" id="alert-esp" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <strong>&Eacute;xito: Cierre de caja correcto</strong></div>');
-							$("#mensaje-load").fadeIn(500).delay(5000).fadeOut(500);	
+							
+                                                    mensajeLoad("Cierre de caja correcto",'ok');
 							$("#caja-lock").show();
 							
 							$("#cerrar-caja").attr('alt',0);
@@ -635,8 +607,8 @@ var tipop = 0;
 							$("#detalle-caja").html('<p style="margin-bottom:0;">INICIE APERTURA CAJA</p>');
 							
 						}else{
-							$("#mensaje-load").html('<div class="alert alert-danger alert-dismissible" id="alert-esp" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> <strong>Error en el cierre de la caja</strong></div>');
-							$("#mensaje-load").fadeIn(500).delay(5000).fadeOut(500);							
+							mensajeLoad("Error en el cierre de la caja","error");
+					
 						}
 					
 				}
@@ -853,7 +825,7 @@ var tipop = 0;
 					i++;
 					if(i == nro){
 						$('#myModal').modal('hide');
-						mensajeLoad('&Eacute;xito: Se ha Finalizado la venta correctamente','ok');
+						mensajeLoad('Se ha Finalizado la venta correctamente','ok');
 						$("#cancelar").click();
 						if(guardar != 1){
 							if(configurarImprimir() == 1){
@@ -865,7 +837,53 @@ var tipop = 0;
 			});
 
 		});
-	}	
+	}
+        function cambiarNotaCredito()
+        {
+            $("#venta_title").html("Finalizar Nota de Credito");
+            $("#total_pagar_title").html("TOTAL NOTA DE CREDITO");
+            $(".section_formas").hide();
+            $(".section_monto").hide();
+            $(".section_vuelto").hide();
+        }
+        function cambiarVenta()
+        {
+            $("#venta_title").html("Finalizar Venta");
+            $("#total_pagar_title").html("TOTAL A PAGAR");
+            $(".section_formas").show();
+            $(".section_monto").show();
+            $(".section_vuelto").show();            
+        }
+        function cargarFormasPago()
+        {
+            var html="";
+            $.ajax({
+                    url: '/ventas/formas-pago/',
+                    type: 'POST',
+                    dataType: 'json',
+                    async:true,
+                    beforeSend: function()
+                    {
+                                            $("#formas_pagos").html('<option value="">Cargando formas de pago...</option>');
+                    },				
+                    success: function (data)
+                    {
+                            if(data)
+                            {
+                                    $.each(data, function(key,value)
+                                    {
+                                            html +="<option value='"+value.id+"'>";
+                                            html += value.nombre;
+                                            html += "</option>";
+                                    });
+                            }else
+                            {
+                                    html +="<option value=''>No existen resultados</option>"; 
+                            }
+                            $("#formas_pagos").html(html);
+                    }
+            });	
+        }
 /******************************************************************************FIN VENTA**********************************************/
 
 /******************************************************************************CLIENTES**********************************************/
@@ -892,7 +910,7 @@ var tipop = 0;
 					$('#modal_listar_cliente').modal('hide');
 					
 					
-					if(!$("#pedido tbody tr").hasClass("noPedido")){
+					if(productosExisten()){
 						if(response.vendedor == 1 ){
 							var r = confirm('Se ha detectado que este cliente se registró como "Vendedor", se borrará la venta en curso?\n¿Desea efectuar esta acción?');
 							if(r){
@@ -913,9 +931,9 @@ var tipop = 0;
 					}
 					
 					
-				}else{
-					$("#mensaje-load").html('<div class="alert alert-danger alert-dismissible" id="alert-esp" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">x</span></button><span class=" glyphicon glyphicon-remove" aria-hidden="true"></span><strong> Error:</strong>Cliente no existe</div>');	
-					$("#mensaje-load").fadeIn(500).delay(5000).fadeOut(500);
+				}else
+                                {
+                                 mensajeLoad("Cliente no existe","error");   
 				}
 				
 				
@@ -940,13 +958,11 @@ var tipop = 0;
 			{
 				loadhide();
 				if(response.rs){
-					$("#mensaje-load").html('<div class="alert alert-success alert-dismissible" id="alert-esp" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">x</span></button><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><strong> Éxito: </strong> Se ha insertado correctamente</div>');
-					$("#mensaje-load").fadeIn(500).delay(5000).fadeOut(500);
+					mensajeLoad("Se ha insertado correctamente","ok");
 					$("#form-cliente").reset();
 					$('#modal_add_cliente').modal('hide');
 				}else{
-					$("#mensaje-load").html('<div class="alert alert-danger alert-dismissible" id="alert-esp" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">x</span></button><span class=" glyphicon glyphicon-remove" aria-hidden="true"></span><strong> Error:</strong>'+response.msg+'</div>');	
-					$("#mensaje-load").fadeIn(500).delay(5000).fadeOut(500);
+					mensajeLoad(response.msg,"error");
 				}
 				
 				

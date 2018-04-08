@@ -257,6 +257,7 @@ class Ventas_Model_Venta  extends Zend_Db_Table_Abstract
 						$sql->where($where);
                     }
 					$sql->order(array("p.PED_FECHA DESC"));
+        
         $resultado = $this->fetchAll($sql);
         $lista = array();
 		

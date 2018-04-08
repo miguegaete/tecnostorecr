@@ -426,20 +426,27 @@ class Ventas_IndexController extends Zend_Controller_Action
 		$this->view->headScript()->appendFile('/js/sistema/ventas/imprimir-documento.js');
 		
 		$pedidos =  new Ventas_Model_Venta();
+                $formasPago = new Ventas_Model_Formas();
 		
 		
 		if ($this->getRequest()->isPost()) {
 			$fecha = $this->_getParam("fecha1");
 			$fecha2 = $this->_getParam("fecha2");
 			$fecha_i = date('Y-m-d 00:00:00',strtotime($fecha));
-			$fecha_f = date('Y-m-d 23:59:59',strtotime($fecha2));			
+			$fecha_f = date('Y-m-d 23:59:59',strtotime($fecha2));
+                        $formaPago = $this->_getParam("select-forma-pago");
 			
-			$where = "p.PED_ESTADO = 2 AND p.PED_FECHA BETWEEN '$fecha_i' AND '$fecha_f' ";
+			$where  = "p.PED_ESTADO = 2";
+                        $where .= " AND (p.PED_FECHA BETWEEN '$fecha_i' AND '$fecha_f') ";
+                        
+                        if($formaPago !=""){
+                            $where .= " AND p.FOR_ID = $formaPago ";
+                        }
 			$this->view->ventas = $pedidos->listado($where);
 			
 			$this->view->fecha_filtro = $this->_getParam("fecha1");
 			$this->view->fecha_filtro2 = $this->_getParam("fecha2");
-			
+			$this->view->forma_filtro = $this->_getParam("select-forma-pago");
 			
 		}else{
 			$fecha_i = date('Y-m-d 00:00:00');
@@ -449,6 +456,8 @@ class Ventas_IndexController extends Zend_Controller_Action
 		}
 		$this->view->tipo_usuario =  $session_usu->tipo;
 		$this->view->usuario =  $session_usu->usuario;
+                $this->view->formasPago =  $formasPago->listar();
+                
 
 		$this->view->title = "Ventas";
 	}

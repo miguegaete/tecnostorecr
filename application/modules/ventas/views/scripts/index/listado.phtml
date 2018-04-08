@@ -12,11 +12,28 @@
 		  <form name="filtro-fecha" method="post" action="">
 			<div class="row">
 				<div class="col-xs-3 col-sm-3 col-md-2">
-				  <input type="text" class="form-control" id="fecha1" autocomplete="false" name="fecha1" value="<?php echo ($this->fecha_filtro!="")?$this->fecha_filtro:date("d-m-Y");?>">
+                                    <input type="text" required="required" class="form-control" id="fecha1" autocomplete="false" name="fecha1" value="<?php echo ($this->fecha_filtro!="")?$this->fecha_filtro:date("d-m-Y");?>">
 				</div>
 				<div class="col-xs-3 col-sm-3 col-md-2">
-				  <input type="text" class="form-control" id="fecha2" autocomplete="false" name="fecha2" value="<?php echo ($this->fecha_filtro2!="")?$this->fecha_filtro2:date("d-m-Y");?>">
-				</div>				
+                                    <input type="text" required="required" class="form-control" id="fecha2" autocomplete="false" name="fecha2" value="<?php echo ($this->fecha_filtro2!="")?$this->fecha_filtro2:date("d-m-Y");?>">
+				</div>	
+				<div class="col-xs-3 col-sm-3 col-md-2">
+                                    <select id="forma-pago" class="form-control" name="select-forma-pago">
+                                        <option value="">Seleccione Forma Pago</option>
+                                        <?php if(count($this->formasPago)>0){
+                                            
+                                            foreach($this->formasPago as $aux){?>
+                                        
+                                            <?php if($this->forma_filtro == $aux->id){ ?>
+                                        <option selected="selected" value="<?php echo $aux->id;?>"><?php echo $aux->nombre;?></option>
+                                            <?php }else{ ?>
+                                            <option value="<?php echo $aux->id;?>"><?php echo $aux->nombre;?></option>
+                                            <?php } ?>
+                                        
+                                        <?php }} ?>
+                                    </select>
+				</div>                            
+                            
 				
 				<div class="col-xs-1 col-sm-2 col-md-1">
 				  <button class="btn btn-default">Filtrar</button>
