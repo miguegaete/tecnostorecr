@@ -108,17 +108,10 @@ var tipop = 0;
 			
 			$("#subtotal_pagar").val($("#Total").html().replace('$', '').replace(/\./g, ''));
 			$("#subtotal_pagar_2").html('$'+formatNumber.new(parseInt($("#total_a_pagar").val())));	
-			
-			
-
-			
+		
 			if(tipop!=2){//Si es distinto de una Nota de credito
-			
-                            alert('entro')
-                            cargarFormasPago();
-			
+				cargarFormasPago();
 			}
-			
 			
 			if(productosExisten()){
 				
